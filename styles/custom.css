@@ -19,16 +19,6 @@
   border-radius: 6px 0 8px 0;
 }
 
-.theorem::after {
-  content: "✍";
-  position: absolute;
-  top: 10px;
-  left: 55px;
-  color: #d32f2f;
-  font-weight: bold;
-  font-size: 0.95em;
-}
-
 .definition {
   border: 2px solid #1976d2;
   background-color: #e3f2fd;
@@ -48,16 +38,6 @@
   padding: 2px 8px;
   font-size: 0.8em;
   border-radius: 6px 0 8px 0;
-}
-
-.definition::after {
-  content: "✍";
-  position: absolute;
-  top: 10px;
-  left: 55px;
-  color: #1976d2;
-  font-weight: bold;
-  font-size: 0.95em;
 }
 
 .lemma {
@@ -81,16 +61,6 @@
   border-radius: 6px 0 8px 0;
 }
 
-.lemma::after {
-  content: "✍";
-  position: absolute;
-  top: 10px;
-  left: 55px;
-  color: #2e7d32;
-  font-weight: bold;
-  font-size: 0.95em;
-}
-
 .corollary {
   border: 2px solid #7b1fa2;
   background-color: #f3e5f5;
@@ -112,16 +82,6 @@
   border-radius: 6px 0 8px 0;
 }
 
-.corollary::after {
-  content: "✍";
-  position: absolute;
-  top: 10px;
-  left: 35px;
-  color: #795548;
-  font-weight: bold;
-  font-size: 0.95em;
-}
-
 .proposition {
   border: 2px solid #f57c00;
   background-color: #fff3e0;
@@ -141,16 +101,6 @@
   padding: 2px 8px;
   font-size: 0.8em;
   border-radius: 6px 0 8px 0;
-}
-
-.proposition::after {
-  content: "✍";
-  position: absolute;
-  top: 10px;
-  left: 55px;
-  color: #2e7d32;
-  font-weight: bold;
-  font-size: 0.95em;
 }
 
 .remark {
@@ -194,23 +144,15 @@
 }
 
 .question::before {
-  content: "質問";
+  content: "Question";
   position: absolute;
-  top: 10px;
-  left: 15px;
-  color: #673ab7;
-  font-weight: bold;
-  font-size: 0.95em;
-}
-
-.question::after {
-  content: "🤔";
-  position: absolute;
-  top: 10px;
-  left: 55px;
-  color: #673ab7;
-  font-weight: bold;
-  font-size: 0.95em;
+  top: 0;
+  left: 0;
+  background-color: #673ab7;
+  color: white;
+  padding: 2px 8px;
+  font-size: 0.8em;
+  border-radius: 6px 0 8px 0;
 }
 
 .caption {
@@ -227,7 +169,7 @@
 }
 
 .reference::before {
-  content: "参考文献";
+  content: "Reference";
   position: absolute;
   top: 10px;
   left: 15px;
