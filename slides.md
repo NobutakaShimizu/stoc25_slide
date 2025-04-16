@@ -201,7 +201,6 @@ $$
 
 - Hidden constant factor in $O_{p,\varepsilon}(\cdot)$ is quite large (roughly $p^{\poly(p,1/\varepsilon)}$)
 - Agreement is optimal up to factor two (random matrix achieves $1/p$-agreement)
-  - Our ongoing work improves $2/p$ to $1/p$
 
 ---
 layout: top-title
@@ -267,7 +266,44 @@ color: amber-light
 
 ::content::
 
-- We believe that our **nonuniform** reduction is practical if $\abs{\Fp}$ is small
+- We believe that our nonuniform reduction is **practical** if $\abs{\Fp}$ is small
+  - running time overhead is $p\cdot \poly(1/\varepsilon) \cdot \log n$
   - simple and thus hidden constant factor is reasonably small
-- Our uniform reductions are based on efficiently encodable/list-decodable codes with linear rate
-  - If the decoding algorithms are practical, so does our uniform reductions
+- Our uniform reductions are based on **efficiently encodable/list-decodable codes** with linear rate
+  - specifically, we use Reed-Solomon codes and expander-based codes
+  - If the code admit a practical list-decoding algorithm, then our reduction is also practical
+- In our follow-up work (to appear in ICALP25), we obtained **uniform** reduction with **optimal** agreement $\alpha = 1/p + \varepsilon$
+  
+---
+layout: section
+color: amber-light
+---
+
+# Proof of Uniform Reduction
+
+---
+layout: top-title
+color: amber-light
+---
+
+::title::
+
+# Basic of Error-Correcting Codes
+
+::content::
+
+- An **encoding function** is a linear map $\Enc\colon \Fp^n \to \Fp^N$ for $N\ge n$
+  - The image $C = \Enc(\Fp^k)$ is called a **code** and $x\in C$ is called a **codeword**
+  - **distance** = $\min_{x,y\in C,x\ne y} \dist(x,y)$
+    - $\dist(\cdot,\cdot)$ is the normalized Hamming distance
+- For $x\in \Fp^N$ and $\rho\in[0,1]$, let $\ball(x,\rho)=\{ y\in\Fp^N \colon \dist(x,y)\le\rho \}$
+
+<div class="topic-box">
+
+  **list-decoding.**
+  Given $x\in\Fp^N$, output $C\cap \ball(x,\rho)$.
+
+</div>
+
+- $\#$ of codewords in $\ball(x,\rho)$?
+- fast algorithm?

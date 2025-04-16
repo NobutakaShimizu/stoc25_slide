@@ -13,6 +13,8 @@ export default function setup() {
       '\\norm': '\\left\\|#1\\right\\|',
       '\\abs': '\\left|#1\\right|',
       '\\set': '\\left\\{#1\\right\\}',
+      '\\Enc': '\\operatorname{Enc}',
+      '\\ball': '\\mathrm{ball}',
       '\\inner': '\\left\\langle#1\\right\\rangle',
       '\\rbra': '\\left(#1\\right)',
       '\\cbra': '\\left\\{#1\\right\\}',
