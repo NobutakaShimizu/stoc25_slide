@@ -118,6 +118,8 @@ $$
   \end{align*}
 $$
 
+Such a matrix $A$ is called an **$\alpha$-agreement** of $B$.
+
 </div>
 
 We start with an algorithm $M$ such that
@@ -288,6 +290,33 @@ color: amber-light
 
 ::title::
 
+# Idea: Matrix Encoding
+
+::content::
+
+- Suppose we have an algorithm $M$ that computes an $\alpha$-agreement of $AB$ for **arbitrary** $A,B\in\Fp^{n\times n}$.
+  - We would like to compute $AB$ for any $A,B\in\Fp^{n\times n}$
+- Given two matrices $A,B \in \Fp^{n\times n}$, we **encode** them using $\Enc\colon \Fp^{n\times n} \to \Fp^{N\times N}$
+- Compute $\widetilde{C} = M(\Enc(A),\Enc(B))$. Note that $\widetilde{C}$ an $\alpha$-agreement of $\Enc(A)\cdot \Enc(B)$.
+
+- **Suppose that $\Enc(A)\cdot \Enc(B) \in \Fp^{N\times N}$ is an encoding of $AB$ of a list-decodable ECC**
+  - i.e., we can write $\Enc(A)\cdot \Enc(B) = \Enc'(AB)$ for some nice $\Enc'\colon\Fp^{n\times n}\to\Fp^{N\times N}$
+- Then, we can obtain a list containing $AB$ by list-decoding $M(\Enc(A),\Enc(B))$
+  - We can identify $AB$ from the list by checking if $AB=C$ using Freivalds' randomized algorithm
+
+<div class="question">
+
+  Is there such $\Enc$ and $\Enc'$?
+
+</div>
+
+---
+layout: top-title
+color: amber-light
+---
+
+::title::
+
 # Basic of Error-Correcting Codes
 
 ::content::
@@ -301,7 +330,7 @@ color: amber-light
 <div class="topic-box">
 
   **list-decoding.**
-  Given $x\in\Fp^N$, output $C\cap \ball(x,\rho)$.
+  Given $x\in\Fp^N$, compute all vectors in $C\cap \ball(x,\rho)$.
 
 </div>
 
