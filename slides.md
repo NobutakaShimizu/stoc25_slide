@@ -186,7 +186,7 @@ Can we achieve a non-trivial $\alpha$ in $\widetilde{O}(n^2)$ time?
 
 </div>
 
-- $\widetilde{O}(\cdot)$ hides a $\polylog(n)$ factor.
+- This talk: $\widetilde{O}(\cdot)$ hides a $\polylog(n)$ factor.
 
 </v-clicks>
 
@@ -247,13 +247,15 @@ $$
 - **Approximate Matrix Multiplication**: Given $A,B\in\mathbb{F}^{n\times n}$, compute a matrix $C$ such that $\agr(C,AB)\ge \alpha$.
 - When $\alpha=1$, all entries are computed correctly for all instances.
 
-- An algorithm $M$ is said to have **average agreement $\alpha$** if it satisfies
+<div class="definition">
+
+An algorithm $M$ is said to have **average agreement $\alpha$** if
 $$
 \Exp_{A,B\sim\mathbb{F}^{n\times n}}[\agr(M(A,B),AB)] = \Pr_{\substack{A,B\sim[n]\\ i,j\sim[n]}}[M(A,B)_{i,j}=(AB)_{i,j}]\ge \alpha.
 $$
  
-- Given $M$ as oracle, it is easy to estimate $\alpha$ by random sampling.
-
+ </div>
+ 
 </v-clicks>
 
 ---
@@ -390,21 +392,23 @@ color: amber-light
 
 ::content::
 
-- Suppose we have an algorithm $M$ that computes an $\alpha$-agreement of $AB$ for **arbitrary** $A,B\in\F^{n\times n}$.
-  - We would like to compute $AB$ for any $A,B\in\F^{n\times n}$
-- Given two matrices $A,B \in \F^{n\times n}$, we **encode** them using $\Enc\colon \F^{n\times n} \to \F^{N\times N}$
-- Compute $\widetilde{C} = M(\Enc(A),\Enc(B))$. Note that $\widetilde{C}$ an $\alpha$-agreement of $\Enc(A)\cdot \Enc(B)$.
+Suppose that $\agr(M(A,B),AB)\ge\alpha$ for any $A,B\in\F^{n\times n}$ (worst-case setting).
 
-- **Suppose that $\Enc(A)\cdot \Enc(B) \in \F^{N\times N}$ is an encoding of $AB$ of a list-decodable ECC**
-  - i.e., we can write $\Enc(A)\cdot \Enc(B) = \Enc'(AB)$ for some nice $\Enc'\colon\F^{n\times n}\to\F^{N\times N}$
-- Then, we can obtain a list containing $AB$ by list-decoding $M(\Enc(A),\Enc(B))$
-  - We can identify $AB$ from the list by checking if $AB=C$ using Freivalds' randomized algorithm
+<div style="display: flex; justify-content: center; align-items: center;">
 
-<div class="question">
-
-  Is there such $\Enc$ and $\Enc'$?
+![Code](./images/reduction.svg)
 
 </div>
+
+<v-click>
+
+<div class="topic-box">
+
+Key point: Design encoding/decoding using **list-decodable codes**.
+
+</div>
+
+</v-click>
 
 ---
 layout: top-title
@@ -419,16 +423,18 @@ color: amber-light
 
 - An **encoding function** is a linear map $\Enc\colon \F^n \to \F^N$ for $N\ge n$
   - The image $C = \Enc(\F^k)$ is called a **code** and $x\in C$ is called a **codeword**
-  - **distance** = $\min_{x,y\in C,x\ne y} \dist(x,y)$
+- **distance** = $\min_{x,y\in C,x\ne y} \dist(x,y)$
     - $\dist(\cdot,\cdot)$ is the normalized Hamming distance
 - For $x\in \F^N$ and $\rho\in[0,1]$, let $\ball(x,\rho)=\{ y\in\F^N \colon \dist(x,y)\le\rho \}$
 
-<div class="topic-box">
-
-  **list-decoding.**
+- **list-decoding.**
   Given $x\in\F^N$, compute all vectors in $C\cap \ball(x,\rho)$.
 
-</div>
+<div class="topic-box">
 
-- $\#$ of codewords in $\ball(x,\rho)$?
-- fast algorithm?
+In this talk, we need the following properties:
+
+1. $\#$ of vectors in $\ball(x,\rho)\cap\calC$ is constant (independent of $n$)
+2. $\widetilde{O}(n)$-time algorithm that output all codewords in $\ball(x,\rho)\cap\calC$.
+
+</div>
