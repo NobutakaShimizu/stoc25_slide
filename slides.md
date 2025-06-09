@@ -379,7 +379,7 @@ layout: section
 color: amber-light
 ---
 
-# Proof of Uniform Reduction
+# Uniform Reduction
 
 ---
 layout: top-title
@@ -417,24 +417,155 @@ color: amber-light
 
 ::title::
 
-# Basic of Error-Correcting Codes
+# Error-Correcting Codes
 
 ::content::
 
-- An **encoding function** is a linear map $\Enc\colon \F^n \to \F^N$ for $N\ge n$
-  - The image $C = \Enc(\F^k)$ is called a **code** and $x\in C$ is called a **codeword**
-- **distance** = $\min_{x,y\in C,x\ne y} \dist(x,y)$
-    - $\dist(\cdot,\cdot)$ is the normalized Hamming distance
-- For $x\in \F^N$ and $\rho\in[0,1]$, let $\ball(x,\rho)=\{ y\in\F^N \colon \dist(x,y)\le\rho \}$
+- A **(linear) code** is a subspace $\calC\subseteq \F^N$.
+  - An element $x\in\calC$ is a **codeword**
+<v-clicks>  
 
-- **list-decoding.**
-  Given $x\in\F^N$, compute all vectors in $C\cap \ball(x,\rho)$.
+- The **rate** of $\calC$ is $r:=\dim(\calC)/N$.
+- The **distance** of $x,y\in\F^N$ is $\dist(x,y):=\frac{1}{N}\abs{\{ i\in[N] \colon x_i\ne y_i \}}$ (fractional Hamming distance).
+  - distance of $\calC$ is $\delta:=\min_{x,y\in\calC,x\ne y} \dist(x,y)$  
 
-<div class="topic-box">
+- An **encoding function** is a linear function $\Enc\colon \F^n\to\F^N$ such that $\calC=\Enc(\F^n)$
+  - $\Enc(z)=Lz$ for some $L\in\F^{n\times N}$ (for $n=\dim\calC$)
 
-In this talk, we need the following properties:
+<div style="display: flex; justify-content: center; align-items: center;">
 
-1. $\#$ of vectors in $\ball(x,\rho)\cap\calC$ is constant (independent of $n$)
-2. $\widetilde{O}(n)$-time algorithm that output all codewords in $\ball(x,\rho)\cap\calC$.
+![code](./images/code.svg)
+
+</div>  
+
+<figcaption style="text-align: center; font-size: 0.8em; color: #666;">
+
+There is a trade-off between rate and distance.
+
+</figcaption>
+
+
+</v-clicks>
+
+---
+layout: top-title
+color: amber-light
+---
+::title::
+# Error-Correcting Codes
+::content::
+
+- For $x\in \F^N$ and $\rho\in[0,1]$, let $\ball(x,\rho)=\{ y\in\F^N \colon \dist(x,y)\le\rho \}$ be the Hamming ball.
+
+<v-clicks>
+
+<div class="definition">
+
+A code $\calC\subseteq\F^N$ is **list-decodable within radius $\rho$ and list size $L$** if $\abs{\calC \cap \ball(y,\rho)}\le L$ for any $y\in\F^N$.
+A list-decoding algorithm is an algorithm that outputs $\calC\cap\ball(y,\rho)$ given $y\in\F^N$ as input.
 
 </div>
+
+<div style="display: flex; justify-content: center; align-items: center;">
+
+![code](./images/list-decoding.svg)
+
+</div>  
+
+In this work, we need the following properties:
+
+1. rate is $\Omega(1)$
+2. list-decodable within radius $\rho=1-\alpha/2$ and list size $L=\widetilde{O}(1)$ using an $\widetilde{O}(N)$-time algorithm.
+
+</v-clicks>
+
+---
+layout: top-title
+color: amber-light
+---
+::title::
+# Tensor Code
+::content::
+
+<div class="definition">
+
+For an encoding function $\Enc\colon \F^n\ni x\mapsto Lx \in \F^N$ of a code $\calC$, the **tensor code** is the code $\calC^2\subseteq\F^{N\times N}$ specified by the encoding function $\Enc'\colon \F^{n\times n} \to \F^{N\times N}$ defined by
+  $$ \Enc'\colon X \mapsto L X L^\top. $$
+
+</div>
+
+- The list-decodability is inherited by the tensor code <a href="https://epubs.siam.org/doi/10.1137/090778274" class="cite-reference">[Gopalan, Guruswami, Raghavendra, 2011]</a>.
+
+<v-click>
+
+<div class="theorem">
+
+If the original code is list-decodable within radius $1-\textcolor{c2185b}{c}$ with list size $O(1)$, then the left-right (tensor) code is list-decodable within radius $1-\textcolor{c2185b}{2c}$ with list size $O(1)$.
+
+</div>
+
+- There is a **factor of two loss** in $c$.
+  - the main reason why our uniform reduction is not optimal if $\F$ is small.
+
+</v-click>
+
+---
+layout: top-title
+color: amber-light
+---
+::title::
+# Uniform Reduction
+::content::
+
+<div style="display: flex; justify-content: center; align-items: center;">
+
+![tensor encoding](./images/LRreduction.svg)
+
+</div>
+
+<figcaption style="text-align: center; font-size: 0.8em; color: #666;">
+
+We can identify $AB$ from the list by checking the Freivalds' randomized algorithm.
+
+</figcaption>
+
+---
+layout: top-title
+color: amber-light
+---
+::title::
+# Uniform Reduction
+::content::
+Summarizing the discussion so far, we obtain the following result:
+
+<div class="theorem">
+
+Assume the following two conditions:
+- There exists a $T(n)$-time algorithm $M$ with agreement $\textcolor{c2185b}{\alpha}$ (for worst-case inputs)
+- There exists a code with rate $\Omega(1)$ that is list-decodable within radius $1-\textcolor{c2185b}{\alpha/2}$ with list size $\widetilde{O}(1)$ in $\widetilde{O}(N)$ time.
+
+Then, there exists an $\widetilde{O}((T(n) + n^2)\cdot \log(\abs{\F}))$-time matrix multiplication algorithm.
+
+</div>
+
+<v-clicks>
+
+- If $\F$ is large, we can use the Reed-Solomon code
+- When $\abs{\F}=O(1)$, there exists a code with rate $\Omega(1)$, list size $O(1)$, and list-decodable within radius $1-\frac{1}{\abs{\F}}-\varepsilon$ in $\widetilde{O}(N^2)$ time <a href="https://drops.dagstuhl.de/entities/document/10.4230/LIPIcs.APPROX/RANDOM.2023.60" class="cite-reference">[Jeronimo, 2023]</a>. Using this, we can take $\textcolor{c2185b}{\alpha=\frac{2}{\abs{\F}}+\varepsilon}$.
+
+</v-clicks>
+
+---
+layout: top-title
+color: amber-light
+---
+::title::
+# Worst-Case to Average-Case Reduction
+::content::
+
+---
+layout: section
+color: amber-light
+---
+# Nonuniform Reduction
+
