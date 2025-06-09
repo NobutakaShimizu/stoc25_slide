@@ -190,6 +190,34 @@ Can we achieve a non-trivial $\alpha$ in $\widetilde{O}(n^2)$ time?
 
 </v-clicks>
 
+---
+layout: top-title
+color: amber-light
+---
+
+::title::
+
+# Practical Situation
+
+::content::
+
+- Many fast matrix multiplication algorithms are impractical
+  - Huge constant factors (not faster than Strassen until $n>10^{155}$ <a href="https://epubs.siam.org/doi/10.1137/1.9781611978322.61" class="cite-reference">\[Alman, Yu, 2025\]</a>)
+
+<v-clicks>
+
+- Matrix multiplication algorithms using physical systems (with practical considerations)
+  - Water flow <a href="https://drops.dagstuhl.de/entities/document/10.4230/LIPIcs.ITCS.2024.96" class="cite-reference">\[Valinat, 2024\]</a>
+  - Thermodynamic systems <a href="https://openreview.net/forum?id=6flkWTzK2H" class="cite-reference">\[Coles et al, 2023\]</a>
+  - Optical devices <a href = "https://www.nature.com/articles/s41377-022-00717-8" class="cite-reference">\[Zhou et al, 2022\]</a>
+
+<div class="topic-box">
+
+  These algorithms may have **errors** due to white noise in physical systems (solving approximate matrix multiplication).
+
+</div>
+
+</v-clicks>
 
 ---
 layout: top-title
@@ -217,13 +245,14 @@ $$
 <v-clicks>
 
 - **Approximate Matrix Multiplication**: Given $A,B\in\mathbb{F}^{n\times n}$, compute a matrix $C$ such that $\agr(C,AB)\ge \alpha$.
+- When $\alpha=1$, all entries are computed correctly for all instances.
+
 - An algorithm $M$ is said to have **average agreement $\alpha$** if it satisfies
 $$
 \Exp_{A,B\sim\mathbb{F}^{n\times n}}[\agr(M(A,B),AB)] = \Pr_{\substack{A,B\sim[n]\\ i,j\sim[n]}}[M(A,B)_{i,j}=(AB)_{i,j}]\ge \alpha.
 $$
  
-- Given $M$ as oracle, it is easy to estimate $\alpha$.
-- When $\alpha=1$, all entries are computed correctly for all instances.
+- Given $M$ as oracle, it is easy to estimate $\alpha$ by random sampling.
 
 </v-clicks>
 
@@ -242,24 +271,25 @@ color: amber-light
 
 For any $\alpha\in(0,1]$, consider a finite field of size $\abs{\F}>10n/\alpha^2$.
 If there exists a $T(n)$-time algorithm with average agreement $\alpha$,
-then there exists a $\widetilde{O}(T(n)\poly(1/\alpha) \cdot \log(\abs{\F}))$-time algorithm that solves matrix multiplication over $\F$.
+then there exists an $\widetilde{O}(T(n)\poly(1/\alpha) \cdot \log(\abs{\F}))$-time algorithm that solves matrix multiplication.
 
 </div>
 
-- **worst-case-to-average-case** and **approximate-to-exact** reduction
-
 <v-clicks>
+
+- $\exists$ algo with agreement $\alpha$ $\Rightarrow$ $\exists$ algo with agreement $1$.
+
 
 <div class="theorem">
 
-Let $\varepsilon\in(0,1]$ be a constant and $\F$ be any finite field $\F$ of constant prime size.
+Let $\varepsilon\in(0,1]$ be a constant and $\F$ be any finite field of constant prime size.
 If there exists a $T(n)$-time algorithm with average agreement $\alpha\ge \frac{2}{\abs{\F}}+\varepsilon$,
 then there exists a $\widetilde{O}_{\abs{\F},\varepsilon}(T(n))$-time algorithm that solves matrix multiplication over $\F$.
 
 </div>
 
 - Hidden constant factor is extremely large: $2^{2^{\poly(\abs{\F}/\varepsilon)}}$
-- $\alpha$ is not optimal
+- $\alpha\ge \frac{\textcolor{c2185b}{2}}{\abs{\F}}+\varepsilon$ is not optimal
 
 </v-clicks>
 
@@ -270,26 +300,26 @@ color: amber-light
 
 ::title::
 
-# Main Result 2: Nonuniform Reduction
+# Main Result 2: Nonuniform Reduction with Optimal $\alpha$
 
 ::content::
 
 <div class="theorem">
 
-Let $\varepsilon\in(0,1]$ be a constant and $\F$ be any finite field $\F$ of constant prime size.
-If there exists a circuit $C$ of size $S$ that has average agreement $\alpha\ge \frac{1}{p}+\varepsilon$,
+Let $\varepsilon\in(0,1]$ be a constant and $\F$ be any finite field of constant prime size.
+If there exists a circuit $C$ of size $S$ that has average agreement $\alpha\ge \frac{1}{\abs{\F}}+\varepsilon$,
 then there exists a circuit $C'$ of size $\widetilde{O}_{p,\varepsilon}(S)$ that solves matrix multiplication over $\F$.
 
-Moreover, we can construct $C'$ in time $O_{p,\varepsilon}(n^3)$.
+Moreover, we can construct $C'$ in time $O_{p,\varepsilon}(n^3)$ given $C$.
 
 </div>
 
 <v-clicks>
 
+- $\exists$ circuit $C$ with $\textcolor{c2185b}{\alpha\ge\frac{1}{\abs{\F}}+\varepsilon}$ $\Rightarrow$ $\exists$ circuit $C'$ with $\textcolor{c2185b}{\alpha=1}$.
 - Reduction with poly-time preprocessing
-- Optimal agreement at the cost of nonuniformity
-- hidden constant is $O(p\cdot \poly(1/\varepsilon))$
-- Proof is based on XOR Lemma (average-case complexity)
+- Proof is based on XOR Lemma
+  - fundamental result in average-case complexity
 
 </v-clicks>
 
@@ -330,190 +360,17 @@ color: amber-light
 
 ::title::
 
-# Motivation
-
-::content::
-
-- Theoretically fast algorithms are not practical due to heavy constant factors.
-- Emerge of fast algorithms utilizing **physical system**
-
----
-layout: top-title
-color: amber-light
----
-
-::title::
-
-# Problem Setting (Formal)
-
-::content::
-
-<div class="definition">
-
-The **agreement** of two matrices $A,B\in\F^{n\times n}$ is defined as
-
-$$
-  \begin{align*}
-    \agr(A,B) &:= \Pr_{i,j\sim[n]}[A(i,j) = B(i,j)]
-  \end{align*}
-$$
-
-Such a matrix $A$ is called an **$\alpha$-agreement** of $B$.
-
-</div>
-
-We start with an algorithm $M$ such that
-
-$$
-  \begin{align*}
-    \Exp_{\substack{A,B\sim\F^{n\times n} \\ M}}[\agr(M(A,B),AB)] &\ge \alpha
-  \end{align*}
-$$
-
-<div class="topic-box">
-
-Our goal: worst-case solver with almost the same running time as $M$
-
-</div>
-
----
-layout: top-title
-color: amber-light
----
-
-::title::
-
-# Our Result (1/3): Large Field
-
-::content::
-
-<div class="theorem">
-
-Suppose $p > 10/\alpha$.
-If there exists an algorithm $M$ that runs in time $T(n)$ and and satisfies
-$$
-  \begin{align*}
-    \Exp_{\substack{A,B\sim\F^{n\times n} \\ M}}[\agr(M(A,B),AB)] &\ge \alpha,
-  \end{align*}
-$$
-
-then there exists a $T(n)\cdot\polylog(n)\cdot \poly(1/\alpha)$-time algorithm $M'$ that satisfies
-
-$$
-  \begin{align*}
-    {}^{\forall}A,B\in\F^{n\times n}, \quad \Pr_{M'}[M'(A,B)=AB] \ge \frac{2}{3}.
-  \end{align*}
-$$
-
-</div>
-
-- <a href="https://arxiv.org/abs/2305.13945" class="cite-reference">\[Gola, Shinkar, Singh, RANDOM'24\]</a> gave the same reduction for $\alpha > 7/8$
-- If $\F$ is large enough, we can error-correct a large fraction (say, 99\%) of errors.
-- Proof is based on ECC (Reed-Solomon code)
-
----
-layout: top-title
-color: amber-light
----
-
-::title::
-
-# Our Result (2/3): Small Field
-
-::content::
-
-<div class="theorem">
-
-If there exists an algorithm $M$ that runs in time $T(n)$ and and satisfies
-$$
-  \begin{align*}
-    \Exp_{\substack{A,B\sim\F^{n\times n} \\ M}}[\agr(M(A,B),AB)] &\ge \frac{2}{p}+\varepsilon,
-  \end{align*}
-$$
-
-then there exists a $O_{p,\varepsilon}(T(n)\cdot\polylog(n))$-time algorithm $M'$ that satisfies
-
-$$
-  \begin{align*}
-    {}^{\forall}A,B\in\F^{n\times n}, \quad \Pr_{M'}[M'(A,B)=AB] \ge \frac{2}{3}.
-  \end{align*}
-$$
-
-</div>
-
-- Hidden constant factor in $O_{p,\varepsilon}(\cdot)$ is quite large (roughly $p^{\poly(p,1/\varepsilon)}$)
-- Agreement is optimal up to factor two (random matrix achieves $1/p$-agreement)
-
----
-layout: top-title
-color: amber-light
----
-
-::title::
-
-# Our Result (3/3): Nonuniform Reduction
-
-::content::
-
-<div class="theorem">
-
-If there exists an algorithm $M$ that runs in time $T(n)$ and and satisfies
-
-$$
-  \begin{align*}
-    \Exp_{\substack{A,B\sim\F^{n\times n} \\ M}}[\agr(M(A,B),AB)] &\ge \frac{1}{p}+\varepsilon,
-  \end{align*}
-$$
-
-then, in time $O_{p,\varepsilon}(n^3)$, we can construct a size-$T(n)\cdot\poly(\log n,p,1/\varepsilon)$ circuit $M'$ that satisfies
-
-$$
-  \begin{align*}
-    {}^{\forall}A,B\in\F^{n\times n}, \quad \Pr_{M'}[M'(A,B)=AB] &\ge \frac{2}{3}.
-  \end{align*}
-$$
-
-</div>
-
-- Reduction with poly-time preprocessing
-- Optimal agreement at the cost of nonuniformity
-- Proof is based on XOR Lemma (average-case complexity)
-
----
-layout: top-title
-color: amber-light
----
-
-::title::
-
-# Related work
-
-::content::
-
-- <a href="https://arxiv.org/abs/2305.13945" class="cite-reference">\[Gola, Shinkar, Singh, RANDOM'24\]</a> gave the same reduction for $\alpha > 7/8$
-  - They also gave a reduction for $p=2$ and $\alpha=1/2+\varepsilon$ under the assumption that $M$ has **one-sided** error (it satisfies $M(A,B)_{i,j}=1$ whenever $(AB)_{i,j}=1$)
-  - Our reduction: $M$ can have two-sided error but is need a preprocessing
-- <a href="https://link.springer.com/article/10.1007/s00453-016-0202-3" class="cite-reference">\[Gąsieniec, Levcopoulos, Lingas, Pagh, Tokuyama, Algorithmica'17 \]</a> showed how to compute $AB$ given three matrices $A,B,C\in\F^{n\times n}$ such that $\agr(AB,C)\ge 1-1/n$.
-  - $n$ entries can be wrong (our reduction allows, say, $0.99n^2$ errors)
-  - Their setting is more restrictive than ours (we are allowed to query the product of random matrices for many times)
-
----
-layout: top-title
-color: amber-light
----
-
-::title::
-
 # Additional Remark
 
 ::content::
 
-- We believe that our nonuniform reduction is **practical** if $\abs{\F}$ is small
+- We believe that our **nonuniform** reduction is **practical** if $\abs{\F}$ is small
   - running time overhead is $p\cdot \poly(1/\varepsilon) \cdot \log n$
   - simple and thus hidden constant factor is reasonably small
-- Our uniform reductions are based on **efficiently encodable/list-decodable codes** with linear rate
-  - specifically, we use Reed-Solomon codes and expander-based codes
-  - If the code admit a practical list-decoding algorithm, then our reduction is also practical
+- Our **uniform** reductions are based on **list-decodable codes** with linear rate
+  - When $\F$ is large, we use Reed-Solomon codes
+  - Whet $\F$ is small, we use expander-based codes <a href="https://drops.dagstuhl.de/entities/document/10.4230/LIPIcs.APPROX/RANDOM.2023.60" class="cite-reference">\[Jeronimo, 2023\]</a>
+    - large hidden constant factor of $2^{2^{\poly(\abs{F}/\varepsilon)}}$ is due to the list-decoding algorithm of this code
   
 ---
 layout: section
