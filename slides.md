@@ -31,7 +31,7 @@ Shuichi Hirahara (National Institute of Informatics)
 [Nobutaka Shimizu](https://sites.google.com/view/nobutaka-shimizu/home) (Institute of Science Tokyo)
 
 <div style="position: absolute; bottom: 20px; font-size: 0.8em; width: 100%; text-align: center;">
-June 24th @STOC2025
+STOC2025
 </div>
 
 
@@ -348,7 +348,7 @@ color: amber-light
   - Computing $AB$ given $A,B,C\in\F^{n\times n}$ such that $\agr(AB,C)\ge 1-1/n$ 
   - More restrictive setting than ours but $\alpha$ must be very close to $1$
 
-- Worst-case to average-case reductions (all entries but random input)
+- Worst-case to average-case reductions (average-case solver computes all entries)
   - <a href="https://www.sciencedirect.com/science/article/pii/002200009390044W?via%3Dihub" class="cite-reference">\[Blum, Luby, Rubinfeld, JCSS'93\]</a>
   - <a href="https://dl.acm.org/doi/10.1145/3519935.3520041" class="cite-reference">\[Asadi, Golovnev, Gur, Shinkar, STOC'22\]</a>
   - <a href="https://dl.acm.org/doi/10.1145/3564246.3585189" class="cite-reference">\[Hirahara, Shimizu, STOC'23\]</a>
@@ -366,14 +366,22 @@ color: amber-light
 
 ::content::
 
+- **query-efficient**: All of our reductions make $O(\log n)$ queries.
+
+<v-clicks>
+
 - We believe that our **nonuniform** reduction is **practical** if $\abs{\F}$ is small
-  - running time overhead is $p\cdot \poly(1/\varepsilon) \cdot \log n$
+  - running time overhead is $\abs{\F}\cdot \poly(1/\varepsilon) \cdot \log n$ (as opposed to $2^{2^{\poly(\abs{\F}/\varepsilon)}}$ in the uniform reduction)
   - simple and thus hidden constant factor is reasonably small
 - Our **uniform** reductions are based on **list-decodable codes** with linear rate
   - When $\F$ is large, we use Reed-Solomon codes
   - Whet $\F$ is small, we use expander-based codes <a href="https://drops.dagstuhl.de/entities/document/10.4230/LIPIcs.APPROX/RANDOM.2023.60" class="cite-reference">\[Jeronimo, 2023\]</a>
     - large hidden constant factor of $2^{2^{\poly(\abs{F}/\varepsilon)}}$ is due to the list-decoding algorithm of this code
-  
+- Our following-up work (ICALP'25)
+  - **uniform** reduction with **optimal** agreement $\alpha\ge\frac{1}{\abs{\F}}+\varepsilon$
+      
+</v-clicks>  
+
 ---
 layout: section
 color: amber-light
@@ -563,9 +571,110 @@ color: amber-light
 # Worst-Case to Average-Case Reduction
 ::content::
 
+- Even if $A,B\sim\F^{n\times n}$, their encodings $LA,BL^\top$ are **not** uniform.
+
+- **Idea**: Divide $LA, BL^\top$ into small blocks such that each block is uniform.
+
+<div style="display: flex; justify-content: center; align-items: center;">
+
+![Code](./images/square.svg)
+
+</div>
+
+
+<figcaption style="text-align: center; font-size: 0.8em; color: #666;">
+
+We divide $LA,BL^\top$ such that the marginal distribution of each $A_i,B_j$ is uniform.
+
+</figcaption>
+
 ---
 layout: section
 color: amber-light
 ---
 # Nonuniform Reduction
 
+---
+layout: top-title
+color: amber-light
+---
+::title::
+# Yao's XOR Lemma
+::content::
+
+- If $\textcolor{c2185b}{f\colon\{0,1\}^n \to \{0,1\}}$ is hard to compute on more than **.99** fraction of inputs, then $\textcolor{c2185b}{f^{\oplus k}(x_1,\dots,x_k):=f(x_1)\oplus \cdots \oplus f(x_k)}$ is hard to compute on more than **.51** fraction of inputs.
+
+<div class="theorem">
+
+Suppose that some small circuit $C\colon\binset^n\to\binset$ satisfies
+$$ \Pr_{x_1,\dots,x_k\sim\binset^n}\sbra{ C(x_1,\dots,x_k) = f^{\oplus k}(x_1,\dots,x_k) } \ge \frac{1}{2} + \varepsilon. $$
+Then, some slightly larger circuit $C'$ satisfies
+$$ \Pr_{x\sim\binset^n}\sbra{ C'(x) = f(x) } \ge 1 - \delta $$
+
+</div>
+
+
+---
+layout: top-title
+color: amber-light
+---
+::title::
+# XOR Lemma for Matrix Multiplication
+::content::
+
+- Idea: Apply XOR lemma for $f(A,B)=AB$ by obtaining **multi-output XOR lemma**
+
+<div style="display: flex; justify-content: center; align-items: center;">
+
+![](./images/XOR.svg)
+
+</div>
+
+
+<figcaption style="text-align: center; font-size: 0.8em; color: #666;">
+
+If we divide $A=[A_1,\dots,A_k]$ and $B=[B_1^\top,\dots,B_k^\top]^\top$, then $AB$ can be seen as $k$-wise XOR of $f(A_1,B_1),\dots,f(A_k,B_k)$.
+
+</figcaption>
+
+---
+layout: top-title
+color: amber-light
+---
+::title::
+# Multi-Output Yao's XOR Lemma
+::content::
+
+- Let $f\colon \binset^n\to\binset^m$ be a multi-output function.
+- Define $f^{\oplus k}(x_1,\dots,x_k):=f(x_1)\oplus \dots \oplus f(x_k) \in \binset^m$ as entry-wise XOR.
+
+<div class="theorem">
+
+Suppose that some size-$s$ circuit $C\colon \binset^n\to\binset^m$ satisfies
+$$ \Pr_{x_1,\dots,x_k\sim\binset^n}\sbra{ C(x_1,\dots,x_k)_{\textcolor{c2185b}{\ell}} = f^{\oplus k}(x_1,\dots,x_k)_{ \textcolor{c2185b}{\ell}} } \ge \frac{1}{2} + \varepsilon $$
+for **all** $\ell\in[m]$.
+Then, some size-$O(s\cdot\textcolor{c2185b}{\log(1/\delta)/\varepsilon^2})$ circuit $C'$ satisfies
+$$ \Pr_{x\sim\binset^n,\,\textcolor{c2185b}{\ell\sim[m]}}\sbra{ C'(x)_{\ell} = f(x)_{\ell} } \ge 1 - \delta $$
+
+</div>
+
+- If we consider $f(A,B)=AB$, then $C'$ has average agreement $\alpha=1-\delta$.
+- If we apply XOR lemma for each entry, then the size of $C'$ would be $\Omega(\textcolor{c2185b}{m}\cdot s)$.
+
+
+---
+layout: top-title
+color: amber-light
+---
+::title::
+# Summary
+::content::
+- If we can solve **approximate** matrix multiplication **on average**, then we can solve **exact** matrix multiplication for **any input** in almost the same time.
+- Proof technique: encoding with tensor code + list-decoding
+  - When the field $\F$ is large ($\abs{\F} = \Omega(n)$): Reed-Solomon code
+  - When the field $\F$ is constant: 
+    - expander-base codes <a href="https://drops.dagstuhl.de/entities/document/10.4230/LIPIcs.APPROX/RANDOM.2023.60" class="cite-reference">\[Jeronimo, 2023\]</a> (not optimal)
+    - nonuniform reduction based on XOR lemma (optimal)
+- Future directions
+  - Can we do something similar for matrix multiplication over the **real numbers**? (In practice, matrix multiplication over the reals is mainstream)
+  - Reduce the hidden constant $2^{2^{\poly(p/\varepsilon)}}$ when the field is small

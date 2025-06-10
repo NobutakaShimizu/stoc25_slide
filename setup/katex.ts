@@ -15,6 +15,7 @@ export default function setup() {
       '\\set': '\\left\\{#1\\right\\}',
       '\\Enc': '\\operatorname{Enc}',
       '\\ball': '\\mathrm{ball}',
+      '\\binset': '\\{0,1\\}',
       '\\F': '\\mathbb{F}',
       '\\inner': '\\left\\langle#1\\right\\rangle',
       '\\rbra': '\\left(#1\\right)',
