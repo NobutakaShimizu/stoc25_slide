@@ -203,13 +203,18 @@ Given two **random** matrices $A,B\sim\F^{n\times n}$ as input, compute any matr
 
 - "Non-trivial algorithm": achieves $\alpha \ge \frac{1}{\abs{\F}} + \varepsilon$ (better than random guess)
 
-<div class="question">
+<div style="display: flex; justify-content: center; align-items: center;">
 
-Can we achieve a non-trivial $\alpha$ in $\widetilde{O}(n^2)$ time?
+![](./images/approximate_MM.svg)
 
 </div>
 
-- This talk: $\widetilde{O}(\cdot)$ hides a $\polylog(n)$ factor.
+<figcaption style="text-align: center; font-size: 0.8em; color: #666;">
+
+The "agreement" entries depend on the input matrices $A,B$.
+
+</figcaption>
+
 
 </v-clicks>
 
@@ -240,7 +245,7 @@ color: amber-light
 
 <div class="topic-box">
 
-Run a physical device. Then, error-correct the output.
+We show how to correct the errors in approximate matrix multiplication algorithms.
 
 </div>
 
