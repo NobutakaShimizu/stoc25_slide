@@ -51,7 +51,7 @@ themeConfig:
 
 :: note ::
 <div class="text-slate-500">
-  @SODA2025
+  @STOC2025
 </div>
 
 ---
@@ -71,8 +71,6 @@ Given two matrices $A, B \in \F^{n\times n}$, compute their product $AB$ (over a
 
 </div>
 
-- A long line of works presented fast algorithms. <v-click> The exponent $\omega$ improves by **0.0046** over **35** years.</v-click>
-
 <div style="display: flex; gap: 1em; font-size: 0.7em; border: 1px solid #ccc; padding: 0.5em; border-radius: 5px;">
 <div>
 
@@ -91,7 +89,7 @@ Given two matrices $A, B \in \F^{n\times n}$, compute their product $AB$ (over a
 |:--:|:--|:--|
 | 1981 | $2.496$ | [Coppersmith, Winograd](https://ieeexplore.ieee.org/document/4568320) |
 | 1986 | $2.479$ | [Strassen](https://ieeexplore.ieee.org/document/4568194) |
-| **1990** | $2.3755$ | [Coppersmith, Winograd](https://www.sciencedirect.com/science/article/pii/S0747717108800132?via%3Dihub) |
+| 1990 | $2.3755$ | [Coppersmith, Winograd](https://www.sciencedirect.com/science/article/pii/S0747717108800132?via%3Dihub) |
 | 2010 | $2.3737$ | [Stothers](https://era.ed.ac.uk/handle/1842/4734) |
 | 2012 | $2.3729$ | [Williams](https://dl.acm.org/doi/10.1145/2213977.2214056) |
 
@@ -104,7 +102,7 @@ Given two matrices $A, B \in \F^{n\times n}$, compute their product $AB$ (over a
 | 2020 | $2.3728596$ | [Alman, Williams](https://theoretics.episciences.org/14213) |
 | 2022 | $2.371866$ | [Duan, Wu, Zhou](https://ieeexplore.ieee.org/document/10353208) |
 | 2024 | $2.371552$ | [Williams, Xu, Xu, and Zhou](https://epubs.siam.org/doi/10.1137/1.9781611977912.134) |
-| **2025** | $2.371339$ | [Alman, Duan, Williams, Xu, Xu, and Zhou](https://epubs.siam.org/doi/10.1137/1.9781611978322.63) |
+| 2025 | $2.371339$ | [Alman, Duan, Williams, Xu, Xu, and Zhou](https://epubs.siam.org/doi/10.1137/1.9781611978322.63) |
 
 </div>
 </div>
@@ -115,7 +113,8 @@ th {
 }
 </style>
 
-  
+
+
 ---
 layout: top-title
 color: amber-light
@@ -147,6 +146,12 @@ th {
   background-color: #f0f0f0;
 }
 </style>
+
+<v-click>
+
+- The exponent $\omega$ improves by **0.0046** over **35** years 😔
+
+</v-click>
 
 ---
 layout: top-title
@@ -393,7 +398,7 @@ color: amber-light
   - simple and thus hidden constant factor is reasonably small
 - Our **uniform** reductions are based on **list-decodable codes** with linear rate
   - When $\F$ is large, we use Reed-Solomon codes
-  - Whet $\F$ is small, we use expander-based codes <a href="https://drops.dagstuhl.de/entities/document/10.4230/LIPIcs.APPROX/RANDOM.2023.60" class="cite-reference">\[Jeronimo, 2023\]</a>
+  - When $\F$ is small, we use expander-based codes <a href="https://drops.dagstuhl.de/entities/document/10.4230/LIPIcs.APPROX/RANDOM.2023.60" class="cite-reference">\[Jeronimo, 2023\]</a>
     - large hidden constant factor of $2^{2^{\poly(\abs{F}/\varepsilon)}}$ is due to the list-decoding algorithm of this code
 - Our following-up work (ICALP'25)
   - **uniform** reduction with **optimal** agreement $\alpha\ge\frac{1}{\abs{\F}}+\varepsilon$
@@ -449,27 +454,21 @@ color: amber-light
 
 - A **(linear) code** is a subspace $\calC\subseteq \F^N$.
   - An element $x\in\calC$ is a **codeword**
+
 <v-clicks>  
 
 - The **rate** of $\calC$ is $r:=\dim(\calC)/N$.
 - The **distance** of $x,y\in\F^N$ is $\dist(x,y):=\frac{1}{N}\abs{\{ i\in[N] \colon x_i\ne y_i \}}$ (fractional Hamming distance).
-  - distance of $\calC$ is $\delta:=\min_{x,y\in\calC,x\ne y} \dist(x,y)$  
-
+  - For $x\in \F^N$ and $\rho\in[0,1]$, let $\ball(x,\rho)=\{ y\in\F^N \colon \dist(x,y)\le\rho \}$ be the Hamming ball.
 - An **encoding function** is a linear function $\Enc\colon \F^n\to\F^N$ such that $\calC=\Enc(\F^n)$
   - $\Enc(z)=Lz$ for some $L\in\F^{n\times N}$ (for $n=\dim\calC$)
 
+
 <div style="display: flex; justify-content: center; align-items: center;">
 
-![code](./images/code.svg)
+![code](./images/encoding.svg)
 
 </div>  
-
-<figcaption style="text-align: center; font-size: 0.8em; color: #666;">
-
-There is a trade-off between rate and distance.
-
-</figcaption>
-
 
 </v-clicks>
 
@@ -481,9 +480,6 @@ color: amber-light
 # Error-Correcting Codes
 ::content::
 
-- For $x\in \F^N$ and $\rho\in[0,1]$, let $\ball(x,\rho)=\{ y\in\F^N \colon \dist(x,y)\le\rho \}$ be the Hamming ball.
-
-<v-clicks>
 
 <div class="definition">
 
@@ -498,12 +494,14 @@ A list-decoding algorithm is an algorithm that outputs $\calC\cap\ball(y,\rho)$ 
 
 </div>  
 
+<v-click>
+
 In this work, we need the following properties:
 
 1. rate is $\Omega(1)$
 2. list-decodable within radius $\rho=1-\alpha/2$ and list size $L=\widetilde{O}(1)$ using an $\widetilde{O}(N)$-time algorithm.
 
-</v-clicks>
+</v-click>
 
 ---
 layout: top-title
@@ -617,30 +615,16 @@ layout: top-title
 color: amber-light
 ---
 ::title::
-# Yao's XOR Lemma
+# XOR Lemma and Matrix Multiplication
 ::content::
 
-- If $\textcolor{c2185b}{f\colon\{0,1\}^n \to \{0,1\}}$ is hard to compute on more than **.99** fraction of inputs, then $\textcolor{c2185b}{f^{\oplus k}(x_1,\dots,x_k):=f(x_1)\oplus \cdots \oplus f(x_k)}$ is hard to compute on more than **.51** fraction of inputs.
+- If $\textcolor{c2185b}{f\colon\{0,1\}^n \to \{0,1\}}$ is hard to compute on more than $(1-\delta)$-fraction of inputs, then $\textcolor{c2185b}{f^{\oplus k}(x_1,\dots,x_k):=f(x_1)\oplus \cdots \oplus f(x_k)}$ is hard to compute on more than $(1/2-\varepsilon)$-fraction of inputs <a class="cite-reference" href="https://ieeexplore.ieee.org/document/4568378">\[Yao, 1982\]</a>
 
-<div class="theorem">
+  - **Contraposition**: If some circuit $C$ computes $f^{\oplus k}$ for at least $(1/2+\varepsilon)$-fraction of inputs, then some slightly larger circuit $C'$ computes $f$ for at least $(1-\delta)$-fraction of inputs.
 
-Suppose that some small circuit $C\colon\binset^n\to\binset$ satisfies
-$$ \Pr_{x_1,\dots,x_k\sim\binset^n}\sbra{ C(x_1,\dots,x_k) = f^{\oplus k}(x_1,\dots,x_k) } \ge \frac{1}{2} + \varepsilon. $$
-Then, some slightly larger circuit $C'$ satisfies
-$$ \Pr_{x\sim\binset^n}\sbra{ C'(x) = f(x) } \ge 1 - \delta $$
+<v-clicks>
 
-</div>
-
-
----
-layout: top-title
-color: amber-light
----
-::title::
-# XOR Lemma for Matrix Multiplication
-::content::
-
-- Idea: Apply XOR lemma for $f(A,B)=AB$ by obtaining **multi-output XOR lemma**
+- Our Idea: Apply **multi-output version** of XOR lemma for $f(A,B)=AB$
 
 <div style="display: flex; justify-content: center; align-items: center;">
 
@@ -648,36 +632,7 @@ color: amber-light
 
 </div>
 
-
-<figcaption style="text-align: center; font-size: 0.8em; color: #666;">
-
-If we divide $A=[A_1,\dots,A_k]$ and $B=[B_1^\top,\dots,B_k^\top]^\top$, then $AB$ can be seen as $k$-wise XOR of $f(A_1,B_1),\dots,f(A_k,B_k)$.
-
-</figcaption>
-
----
-layout: top-title
-color: amber-light
----
-::title::
-# Multi-Output Yao's XOR Lemma
-::content::
-
-- Let $f\colon \binset^n\to\binset^m$ be a multi-output function.
-- Define $f^{\oplus k}(x_1,\dots,x_k):=f(x_1)\oplus \dots \oplus f(x_k) \in \binset^m$ as entry-wise XOR.
-
-<div class="theorem">
-
-Suppose that some size-$s$ circuit $C\colon \binset^n\to\binset^m$ satisfies
-$$ \Pr_{x_1,\dots,x_k\sim\binset^n}\sbra{ C(x_1,\dots,x_k)_{\textcolor{c2185b}{\ell}} = f^{\oplus k}(x_1,\dots,x_k)_{ \textcolor{c2185b}{\ell}} } \ge \frac{1}{2} + \varepsilon $$
-for **all** $\ell\in[m]$.
-Then, some size-$O(s\cdot\textcolor{c2185b}{\log(1/\delta)/\varepsilon^2})$ circuit $C'$ satisfies
-$$ \Pr_{x\sim\binset^n,\,\textcolor{c2185b}{\ell\sim[m]}}\sbra{ C'(x)_{\ell} = f(x)_{\ell} } \ge 1 - \delta $$
-
-</div>
-
-- If we consider $f(A,B)=AB$, then $C'$ has average agreement $\alpha=1-\delta$.
-- If we apply XOR lemma for each entry, then the size of $C'$ would be $\Omega(\textcolor{c2185b}{m}\cdot s)$.
+</v-clicks>
 
 
 ---
@@ -691,7 +646,7 @@ color: amber-light
 - Proof technique: encoding with tensor code + list-decoding
   - When the field $\F$ is large ($\abs{\F} = \Omega(n)$): Reed-Solomon code
   - When the field $\F$ is constant: 
-    - expander-base codes <a href="https://drops.dagstuhl.de/entities/document/10.4230/LIPIcs.APPROX/RANDOM.2023.60" class="cite-reference">\[Jeronimo, 2023\]</a> (not optimal)
+    - expander-based codes <a href="https://drops.dagstuhl.de/entities/document/10.4230/LIPIcs.APPROX/RANDOM.2023.60" class="cite-reference">\[Jeronimo, 2023\]</a> (not optimal)
     - nonuniform reduction based on XOR lemma (optimal)
 - Future directions
   - Can we do something similar for matrix multiplication over the **real numbers**? (In practice, matrix multiplication over the reals is mainstream)
