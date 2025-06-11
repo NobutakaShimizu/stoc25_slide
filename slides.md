@@ -201,7 +201,7 @@ Given two **random** matrices $A,B\sim\F^{n\times n}$ as input, compute any matr
 
 - $\alpha = \frac{1}{\abs{\F}}$ is easy (random matrix)
 
-- "Non-trivial algorithm": achieves $\alpha \ge \frac{1}{\abs{\F}} + \varepsilon$ (better than random guess)
+- An algorithm is non-trivial if $\alpha \ge \frac{1}{\abs{\F}} + \textcolor{c2185b}{\varepsilon}$ (better than random guess)
 
 <div style="display: flex; justify-content: center; align-items: center;">
 
@@ -230,7 +230,7 @@ color: amber-light
 ::content::
 
 - Many fast matrix multiplication algorithms are impractical
-  - Huge constant factors (not faster than Strassen until $n>10^{155}$ <a href="https://epubs.siam.org/doi/10.1137/1.9781611978322.61" class="cite-reference">\[Alman, Yu, 2025\]</a>)
+  - Huge constant factors <a href="https://epubs.siam.org/doi/10.1137/1.9781611978322.61" class="cite-reference">\[Alman, Yu, 2025\]</a>
 
 <v-clicks>
 
@@ -245,7 +245,7 @@ color: amber-light
 
 <div class="topic-box">
 
-We show how to correct the errors in approximate matrix multiplication algorithms.
+We show how to **correct** the errors in approximate matrix multiplication algorithms.
 
 </div>
 
@@ -348,7 +348,7 @@ Moreover, we can construct $C'$ in time $O_{p,\varepsilon}(n^3)$ given $C$.
 <v-clicks>
 
 - $\exists$ circuit $C$ with $\textcolor{c2185b}{\alpha\ge\frac{1}{\abs{\F}}+\varepsilon}$ $\Rightarrow$ $\exists$ circuit $C'$ with $\textcolor{c2185b}{\alpha=1}$.
-- Proof is based on XOR Lemma
+- Proof is based on Yao's XOR Lemma <a href="https://ieeexplore.ieee.org/document/4568378" class="cite-reference">\[Yao, 1982\]</a>
   - fundamental result in average-case complexity
 
 </v-clicks>
