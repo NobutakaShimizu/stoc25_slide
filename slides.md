@@ -149,7 +149,7 @@ th {
 
 <v-click>
 
-- The exponent $\omega$ improves by **0.0046** over **35** years 😔
+The exponent $\omega$ improves by **0.0046** over **35** years 😔
 
 </v-click>
 
@@ -164,7 +164,7 @@ color: amber-light
 
 ::content::
 
-If the current improvement rate (0.0046 / 35 yrs) continues, we need 3122 more years to reach $O(n^2)$ time.
+If the current improvement rate (0.0046 / 35 yrs) continues, we need 3122 more years to reach $\omega=2$.
 
 
 <div style="width: 80%; margin: 0 auto;">
@@ -199,9 +199,9 @@ Given two **random** matrices $A,B\sim\F^{n\times n}$ as input, compute any matr
 
 - $\alpha = 1$: the usual (average-case) matrix multiplication
 
-- $\alpha = \frac{1}{\abs{\F}}$ is easy (just output the all-zero matrix)
+- $\alpha = \frac{1}{\abs{\F}}$ is easy (random matrix)
 
-- "Non-trivial algorithm": achieves $\alpha \ge \frac{1}{\abs{\F}} + \varepsilon$
+- "Non-trivial algorithm": achieves $\alpha \ge \frac{1}{\abs{\F}} + \varepsilon$ (better than random guess)
 
 <div class="question">
 
@@ -234,9 +234,13 @@ color: amber-light
   - Thermodynamic systems <a href="https://openreview.net/forum?id=6flkWTzK2H" class="cite-reference">\[Coles et al, 2023\]</a>
   - Optical devices <a href = "https://www.nature.com/articles/s41377-022-00717-8" class="cite-reference">\[Zhou et al, 2022\]</a>
 
+- These algorithms may have **errors** due to white noise in physical systems
+  - Physical devices solves **approximate** matrix multiplication
+
+
 <div class="topic-box">
 
-  These algorithms may have **errors** due to white noise in physical systems (solving approximate matrix multiplication).
+Run a physical device. Then, error-correct the output.
 
 </div>
 
@@ -263,22 +267,20 @@ $$
   \end{align*}
 $$
 
-</div>
-
-<v-clicks>
-
-- **Approximate Matrix Multiplication**: Given $A,B\in\mathbb{F}^{n\times n}$, compute a matrix $C$ such that $\agr(C,AB)\ge \alpha$.
-- When $\alpha=1$, all entries are computed correctly for all instances.
-
-<div class="definition">
-
 An algorithm $M$ is said to have **average agreement $\alpha$** if
 $$
 \Exp_{A,B\sim\mathbb{F}^{n\times n}}[\agr(M(A,B),AB)] = \Pr_{\substack{A,B\sim[n]\\ i,j\sim[n]}}[M(A,B)_{i,j}=(AB)_{i,j}]\ge \alpha.
 $$
  
  </div>
- 
+
+
+<v-clicks>
+
+- $\alpha=1$ means that $M$ computes $AB$ exactly for any input $A,B$.
+- We can estimate $\alpha$ in $\widetilde{O}(n^2)$ time by random sampling
+  - Choose $A,B,i,j$ and check whether $M(A,B)_{i,j}=(AB)_{i,j}$
+
 </v-clicks>
 
 ---
@@ -296,24 +298,23 @@ color: amber-light
 
 For any $\alpha\in(0,1]$, consider a finite field of size $\abs{\F}>10n/\alpha^2$.
 If there exists a $T(n)$-time algorithm with average agreement $\alpha$,
-then there exists an $\widetilde{O}(T(n)\poly(1/\alpha) \cdot \log(\abs{\F}))$-time algorithm that solves matrix multiplication.
+then there exists an $\widetilde{O}(T(n)\poly(1/\alpha) \cdot \log(\abs{\F}))$-time algorithm with average agreement $1$.
 
 </div>
 
 <v-clicks>
 
-- $\exists$ algo with agreement $\alpha$ $\Rightarrow$ $\exists$ algo with agreement $1$.
+- $\exists$ average-case approximation algorithm $\Rightarrow$ $\exists$ worst-case exact algorithm
 
 
 <div class="theorem">
 
 Let $\varepsilon\in(0,1]$ be a constant and $\F$ be any finite field of constant prime size.
-If there exists a $T(n)$-time algorithm with average agreement $\alpha\ge \frac{2}{\abs{\F}}+\varepsilon$,
-then there exists a $\widetilde{O}_{\abs{\F},\varepsilon}(T(n))$-time algorithm that solves matrix multiplication over $\F$.
+If there exists a $T(n)$-time algorithm with average agreement $\alpha\ge \frac{\textcolor{c2185b}{2}}{\abs{\F}}+\varepsilon$,
+then there exists a $\widetilde{O}_{\abs{\F},\varepsilon}(T(n))$-time algorithm with average agreement $1$.
 
 </div>
 
-- Hidden constant factor is extremely large: $2^{2^{\poly(\abs{\F}/\varepsilon)}}$
 - $\alpha\ge \frac{\textcolor{c2185b}{2}}{\abs{\F}}+\varepsilon$ is not optimal
 
 </v-clicks>
@@ -332,8 +333,8 @@ color: amber-light
 <div class="theorem">
 
 Let $\varepsilon\in(0,1]$ be a constant and $\F$ be any finite field of constant prime size.
-If there exists a circuit $C$ of size $S$ that has average agreement $\alpha\ge \frac{1}{\abs{\F}}+\varepsilon$,
-then there exists a circuit $C'$ of size $\widetilde{O}_{p,\varepsilon}(S)$ that solves matrix multiplication over $\F$.
+If there exists a circuit $C$ of size $S$ with average agreement $\alpha\ge \frac{1}{\abs{\F}}+\varepsilon$,
+then there exists a circuit $C'$ of size $\widetilde{O}_{p,\varepsilon}(S)$ with average agreement $1$.
 
 Moreover, we can construct $C'$ in time $O_{p,\varepsilon}(n^3)$ given $C$.
 
@@ -342,39 +343,8 @@ Moreover, we can construct $C'$ in time $O_{p,\varepsilon}(n^3)$ given $C$.
 <v-clicks>
 
 - $\exists$ circuit $C$ with $\textcolor{c2185b}{\alpha\ge\frac{1}{\abs{\F}}+\varepsilon}$ $\Rightarrow$ $\exists$ circuit $C'$ with $\textcolor{c2185b}{\alpha=1}$.
-- Reduction with poly-time preprocessing
 - Proof is based on XOR Lemma
   - fundamental result in average-case complexity
-
-</v-clicks>
-
----
-layout: top-title
-color: amber-light
----
-
-::title::
-
-# Related Results
-
-::content::
-
-
-- <a class="cite-reference" href="https://drops.dagstuhl.de/entities/document/10.4230/LIPIcs.APPROX/RANDOM.2024.34">\[Gola, Shinkar, Singh, RANDOM'24\]</a>
-  - Similar result for $\F=\F_2$ (under one-sided error setting)
-  - $\exists$ algo with $\alpha>\frac{8}{9}$ $\Rightarrow$ $\exists$ algo with $\alpha=1$
-
-<v-clicks>
-
-
-- <a href="https://link.springer.com/article/10.1007/s00453-016-0202-3" class="cite-reference">\[Gąsieniec, Levcopoulos, Lingas, Pagh, Tokuyama, Algorithmica'17 \]</a>
-  - Computing $AB$ given $A,B,C\in\F^{n\times n}$ such that $\agr(AB,C)\ge 1-1/n$ 
-  - More restrictive setting than ours but $\alpha$ must be very close to $1$
-
-- Worst-case to average-case reductions (average-case solver computes all entries)
-  - <a href="https://www.sciencedirect.com/science/article/pii/002200009390044W?via%3Dihub" class="cite-reference">\[Blum, Luby, Rubinfeld, JCSS'93\]</a>
-  - <a href="https://dl.acm.org/doi/10.1145/3519935.3520041" class="cite-reference">\[Asadi, Golovnev, Gur, Shinkar, STOC'22\]</a>
-  - <a href="https://dl.acm.org/doi/10.1145/3564246.3585189" class="cite-reference">\[Hirahara, Shimizu, STOC'23\]</a>
 
 </v-clicks>
 
@@ -401,9 +371,39 @@ color: amber-light
   - When $\F$ is small, we use expander-based codes <a href="https://drops.dagstuhl.de/entities/document/10.4230/LIPIcs.APPROX/RANDOM.2023.60" class="cite-reference">\[Jeronimo, 2023\]</a>
     - large hidden constant factor of $2^{2^{\poly(\abs{F}/\varepsilon)}}$ is due to the list-decoding algorithm of this code
 - Our following-up work (ICALP'25)
-  - **uniform** reduction with **optimal** agreement $\alpha\ge\frac{1}{\abs{\F}}+\varepsilon$
+  - **uniform** reduction with **optimal** agreement $\alpha\ge\frac{1}{\abs{\F}}+\varepsilon$ (but large hidden constant factor)
       
 </v-clicks>  
+
+---
+layout: top-title
+color: amber-light
+---
+
+::title::
+
+# Related Results
+
+::content::
+
+
+- <a class="cite-reference" href="https://drops.dagstuhl.de/entities/document/10.4230/LIPIcs.APPROX/RANDOM.2024.34">\[Gola, Shinkar, Singh, RANDOM'24\]</a>
+  - Similar result for $\F=\F_2$ (under one-sided error setting)
+  - $\exists$ algo with $\alpha>\frac{8}{9}$ $\Rightarrow$ $\exists$ algo with $\alpha=1$
+    - our reduction deals with smaller $\alpha$
+
+<v-clicks>
+
+
+- <a href="https://link.springer.com/article/10.1007/s00453-016-0202-3" class="cite-reference">\[Gąsieniec, Levcopoulos, Lingas, Pagh, Tokuyama, Algorithmica'17 \]</a>
+  - Computing $AB$ given $A,B,C\in\F^{n\times n}$ such that $\agr(AB,C)\ge 1-1/n$ 
+
+- Worst-case to average-case reductions (average-case solver computes all entries)
+  - <a href="https://www.sciencedirect.com/science/article/pii/002200009390044W?via%3Dihub" class="cite-reference">\[Blum, Luby, Rubinfeld, JCSS'93\]</a>
+  - <a href="https://dl.acm.org/doi/10.1145/3519935.3520041" class="cite-reference">\[Asadi, Golovnev, Gur, Shinkar, STOC'22\]</a>
+  - <a href="https://dl.acm.org/doi/10.1145/3564246.3585189" class="cite-reference">\[Hirahara, Shimizu, STOC'23\]</a>
+
+</v-clicks>
 
 ---
 layout: section
@@ -454,14 +454,9 @@ color: amber-light
 
 - A **(linear) code** is a subspace $\calC\subseteq \F^N$.
   - An element $x\in\calC$ is a **codeword**
-
-<v-clicks>  
-
-- The **rate** of $\calC$ is $r:=\dim(\calC)/N$.
-- The **distance** of $x,y\in\F^N$ is $\dist(x,y):=\frac{1}{N}\abs{\{ i\in[N] \colon x_i\ne y_i \}}$ (fractional Hamming distance).
-  - For $x\in \F^N$ and $\rho\in[0,1]$, let $\ball(x,\rho)=\{ y\in\F^N \colon \dist(x,y)\le\rho \}$ be the Hamming ball.
-- An **encoding function** is a linear function $\Enc\colon \F^n\to\F^N$ such that $\calC=\Enc(\F^n)$
-  - $\Enc(z)=Lz$ for some $L\in\F^{n\times N}$ (for $n=\dim\calC$)
+  - The **rate** of $\calC$ is $r:=n/N$, where $n=\dim \calC$
+  - An **encoding function** is a linear function $\Enc\colon \F^n\to\calC^N$
+    - $\Enc(z)=Lz$ for some $L\in\F^{n\times N}$ (for $n=\dim\calC$)
 
 
 <div style="display: flex; justify-content: center; align-items: center;">
@@ -470,7 +465,12 @@ color: amber-light
 
 </div>  
 
-</v-clicks>
+<v-click>
+
+- The **distance** of $x,y\in\F^N$ is $\dist(x,y):=\frac{1}{N}\abs{\{ i\in[N] \colon x_i\ne y_i \}}$ (fractional Hamming distance).
+  - For $x\in \F^N$ and $\rho\in[0,1]$, let $\ball(x,\rho)=\{ y\in\F^N \colon \dist(x,y)\le\rho \}$ be the Hamming ball.
+
+</v-click>
 
 ---
 layout: top-title
