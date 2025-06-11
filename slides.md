@@ -26,15 +26,33 @@ themeConfig:
 
 # Error-Correction of Matrix Multiplication Algorithms
 
-Shuichi Hirahara (National Institute of Informatics)
+<div class="grid grid-cols-2 gap-4 place-items-center h-56">
 
-[Nobutaka Shimizu](https://sites.google.com/view/nobutaka-shimizu/home) (Institute of Science Tokyo)
+<div>
 
-<div style="position: absolute; bottom: 20px; font-size: 0.8em; width: 100%; text-align: center;">
-STOC2025
+- Shuichi Hirahara (National Institute of Informatics)
+- [**Nobutaka Shimizu**](https://sites.google.com/view/nobutaka-shimizu/home) (Institute of Science Tokyo)
+
+</div>
+<div>
+
+  <QRCode value="https://nobutakashimizu.github.io/stoc25_slide/" :size="120" render-as="svg"/>
+
+<div class="text-center text-blue-500 text-sm">
+
+  $\uparrow$ [slide (github page)](https://nobutakashimizu.github.io/stoc25_slide/)
+
+  [ECCC link](https://eccc.weizmann.ac.il/report/2025/031/)
+
+</div>
 </div>
 
+</div>
 
+:: note ::
+<div class="text-slate-500">
+  @SODA2025
+</div>
 
 ---
 layout: top-title
@@ -161,14 +179,14 @@ color: amber-light
 
 ::title::
 
-# Approximate Matrix Multiplication
+# Average-Case Approximate Matrix Multiplication
 
 ::content::
 
 
 <div class="topic-box">
 
-Given two **random** matrices $A,B\sim\F^{n\times n}$ as input, compute any matrix $C\in\F^{n\times n}$ that agrees with $AB$ on at least $\textcolor{c2185b}{\alpha}\cdot n^2$.
+Given two **random** matrices $A,B\sim\F^{n\times n}$ as input, compute any matrix $C\in\F^{n\times n}$ that agrees with $AB$ on at least $\textcolor{c2185b}{\alpha}\cdot n^2$ entries.
 
 </div>
 
@@ -338,7 +356,7 @@ color: amber-light
 
 
 - <a class="cite-reference" href="https://drops.dagstuhl.de/entities/document/10.4230/LIPIcs.APPROX/RANDOM.2024.34">\[Gola, Shinkar, Singh, RANDOM'24\]</a>
-  - Similar result for $\F=\F_2$ under **one-sided error** setting (our result: two-sided error)
+  - Similar result for $\F=\F_2$ (under one-sided error setting)
   - $\exists$ algo with $\alpha>\frac{8}{9}$ $\Rightarrow$ $\exists$ algo with $\alpha=1$
 
 <v-clicks>
