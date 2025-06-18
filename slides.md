@@ -375,9 +375,6 @@ color: amber-light
   - When $\F$ is large, we use Reed-Solomon codes
   - When $\F$ is small, we use expander-based codes <a href="https://drops.dagstuhl.de/entities/document/10.4230/LIPIcs.APPROX/RANDOM.2023.60" class="cite-reference">\[Jeronimo, 2023\]</a>
     - large hidden constant factor of $2^{2^{\poly(\abs{F}/\varepsilon)}}$ is due to the list-decoding algorithm of this code
-- Our following-up work (ICALP'25)
-  - **uniform** reduction with **optimal** agreement $\alpha\ge\frac{1}{\abs{\F}}+\varepsilon$ (but large hidden constant factor)
-      
 </v-clicks>  
 
 ---
@@ -395,7 +392,6 @@ color: amber-light
 - <a class="cite-reference" href="https://drops.dagstuhl.de/entities/document/10.4230/LIPIcs.APPROX/RANDOM.2024.34">\[Gola, Shinkar, Singh, RANDOM'24\]</a>
   - Similar result for $\F=\F_2$ (under one-sided error setting)
   - $\exists$ algo with $\alpha>\frac{8}{9}$ $\Rightarrow$ $\exists$ algo with $\alpha=1$
-    - our reduction deals with smaller $\alpha$
 
 <v-clicks>
 
@@ -404,10 +400,11 @@ color: amber-light
   - Computing $AB$ given $A,B,C\in\F^{n\times n}$ such that $\agr(AB,C)\ge 1-1/n$ 
 
 - Worst-case to average-case reductions (average-case solver computes all entries)
-  - <a href="https://www.sciencedirect.com/science/article/pii/002200009390044W?via%3Dihub" class="cite-reference">\[Blum, Luby, Rubinfeld, JCSS'93\]</a>
-  - <a href="https://dl.acm.org/doi/10.1145/3519935.3520041" class="cite-reference">\[Asadi, Golovnev, Gur, Shinkar, STOC'22\]</a>
-  - <a href="https://dl.acm.org/doi/10.1145/3564246.3585189" class="cite-reference">\[Hirahara, Shimizu, STOC'23\]</a>
+  - <a href="https://www.sciencedirect.com/science/article/pii/002200009390044W?via%3Dihub" class="cite-reference">\[Blum, Luby, Rubinfeld, JCSS'93\]</a>, <a href="https://dl.acm.org/doi/10.1145/3519935.3520041" class="cite-reference">\[Asadi, Golovnev, Gur, Shinkar, STOC'22\]</a>, <a href="https://dl.acm.org/doi/10.1145/3564246.3585189" class="cite-reference">\[Hirahara, Shimizu, STOC'23\]</a>
 
+- follow-up work: **uniform reduction** with **optimal** agreement $\alpha\ge\frac{1}{\abs{\F}}+\varepsilon$
+  - <a class="cite-reference" href="https://eccc.weizmann.ac.il/report/2025/066/">\[Hirahara, Shimizu, 2025\]</a> (hidden constant is large $2^{2^{\poly(\abs{\F}/\varepsilon)}}$)
+  - <a class="cite-reference" href="https://arxiv.org/abs/2502.13065">\[Vaikuntanathan, Zamir, 2025\]</a> under LPN assumption (hidden constant is $\polylog(\abs{\F}/\varepsilon)$)
 </v-clicks>
 
 ---
