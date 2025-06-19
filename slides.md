@@ -180,6 +180,12 @@ If the current improvement rate (0.0046 / 35 yrs) continues, we need 3122 more y
 
 </div>
 
+<v-click>
+
+Moreover, the hidden constant factor of current techniques is huge <a class="cite-reference" href="https://epubs.siam.org/doi/10.1137/1.9781611978322.61">\[Alman, Yu, 2025\]</a>.
+
+</v-click>
+
 ---
 layout: top-title
 color: amber-light
