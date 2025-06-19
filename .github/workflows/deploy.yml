@@ -31,9 +31,6 @@ jobs:
       - name: Install dependencies
         run: nci
 
-      - name: Install neversink
-        run: npm install slidev-theme-neversink
-
       - name: Install chromium
         run: npm i -D playwright-chromium
 

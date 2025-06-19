@@ -11,7 +11,10 @@ mdc: true
 css: unocss
 style: |
   @import './styles/custom.css';
-
+addons:
+  - slidev-addon-rabbit
+rabbit:
+  slideNum: true 
 fonts:
   sans: 'Roboto'
   mono: 'Fira Code'
