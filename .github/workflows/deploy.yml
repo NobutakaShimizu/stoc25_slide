@@ -28,6 +28,8 @@ jobs:
       - name: Setup @antfu/ni
         run: npm i -g @antfu/ni
 
+      - run: npm install
+
       - name: Install dependencies
         run: nci
 
