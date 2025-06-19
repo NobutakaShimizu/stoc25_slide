@@ -204,14 +204,6 @@ Given two **random** matrices $A,B\sim\F^{n\times n}$ as input, compute any matr
 
 </div>
 
-<v-clicks>
-
-- $\alpha = 1$: the usual (average-case) matrix multiplication
-
-- $\alpha = \frac{1}{\abs{\F}}$ is easy (random matrix)
-
-- An algorithm is non-trivial if $\alpha \ge \frac{1}{\abs{\F}} + \textcolor{c2185b}{\varepsilon}$ (better than random guess)
-
 <div style="display: flex; justify-content: center; align-items: center;">
 
 ![](./images/approximate_MM.svg)
@@ -224,6 +216,13 @@ The "agreement" entries depend on the input matrices $A,B$.
 
 </figcaption>
 
+<v-clicks>
+
+- $\alpha = 1$: the usual (average-case) matrix multiplication
+
+- $\alpha = \frac{1}{\abs{\F}}$ is easy (random matrix)
+
+- An algorithm is non-trivial if $\alpha \ge \frac{1}{\abs{\F}} + \textcolor{c2185b}{\varepsilon}$ (better than random guess)
 
 </v-clicks>
 
@@ -283,7 +282,7 @@ $$
 
 An algorithm $M$ is said to have **average agreement $\alpha$** if
 $$
-\Exp_{A,B\sim\mathbb{F}^{n\times n}}[\agr(M(A,B),AB)] = \Pr_{\substack{A,B\sim[n]\\ i,j\sim[n]}}[M(A,B)_{i,j}=(AB)_{i,j}]\ge \alpha.
+\Exp_{A,B\sim\mathbb{F}^{n\times n}}[\agr(M(A,B),AB)] = \Pr_{\substack{A,B\sim\F^{n\times n}\\ i,j\sim[n]}}[M(A,B)_{i,j}=(AB)_{i,j}]\ge \alpha.
 $$
  
  </div>
@@ -378,12 +377,12 @@ color: amber-light
 <v-clicks>
 
 - We believe that our **nonuniform** reduction is **practical** if $\abs{\F}$ is small
-  - running time overhead is $\abs{\F}\cdot \poly(1/\varepsilon) \cdot \log n$ (as opposed to $2^{2^{\poly(\abs{\F}/\varepsilon)}}$ in the uniform reduction)
+  - running time overhead is $\abs{\F}\cdot \poly(1/\varepsilon) \cdot \log n$
   - simple and thus hidden constant factor is reasonably small
 - Our **uniform** reductions are based on **list-decodable codes** with linear rate
   - When $\F$ is large, we use Reed-Solomon codes
   - When $\F$ is small, we use expander-based codes <a href="https://drops.dagstuhl.de/entities/document/10.4230/LIPIcs.APPROX/RANDOM.2023.60" class="cite-reference">\[Jeronimo, 2023\]</a>
-    - large hidden constant factor of $2^{2^{\poly(\abs{F}/\varepsilon)}}$ is due to the list-decoding algorithm of this code
+    - hidden constant factor in our reduction is very large $2^{2^{\poly(\abs{F}/\varepsilon)}}$
 </v-clicks>  
 
 ---
@@ -434,7 +433,7 @@ color: amber-light
 
 ::content::
 
-Suppose that $\agr(M(A,B),AB)\ge\alpha$ for any $A,B\in\F^{n\times n}$ (worst-case setting).
+$M$: worst-case approximation algorithm such that $\agr(M(A,B),AB)\ge\alpha$ for any $A,B\in\F^{n\times n}$
 
 <div style="display: flex; justify-content: center; align-items: center;">
 
@@ -463,25 +462,23 @@ color: amber-light
 
 ::content::
 
-- A **(linear) code** is a subspace $\calC\subseteq \F^N$.
-  - An element $x\in\calC$ is a **codeword**
-  - The **rate** of $\calC$ is $r:=n/N$, where $n=\dim \calC$
-  - An **encoding function** is a linear function $\Enc\colon \F^n\to\calC^N$
-    - $\Enc(z)=Lz$ for some $L\in\F^{n\times N}$ (for $n=\dim\calC$)
-
-
+- An **encoding function** is a linear map $\Enc\colon \F^n\to\F^N$
+  - $\Enc(z)=Lz$ for $L\in\F^{N\times n}$
+  - A **code** is $\calC=\Enc(\F^n)\subseteq \F^N$
+  
 <div style="display: flex; justify-content: center; align-items: center;">
 
 ![code](./images/encoding.svg)
 
-</div>  
+</div>    
+  
+<v-clicks>
+  
+- $r=n/N$: rate of $\calC$
+- $x\in \calC$: **codeword**
+- **distance**: fractional Hamming distance, i.e., $\dist(x,y):=\Pr_{i\sim[N]}[x_i\ne y_i]$
 
-<v-click>
-
-- The **distance** of $x,y\in\F^N$ is $\dist(x,y):=\frac{1}{N}\abs{\{ i\in[N] \colon x_i\ne y_i \}}$ (fractional Hamming distance).
-  - For $x\in \F^N$ and $\rho\in[0,1]$, let $\ball(x,\rho)=\{ y\in\F^N \colon \dist(x,y)\le\rho \}$ be the Hamming ball.
-
-</v-click>
+</v-clicks>
 
 ---
 layout: top-title
@@ -495,9 +492,12 @@ color: amber-light
 <div class="definition">
 
 A code $\calC\subseteq\F^N$ is **list-decodable within radius $\rho$ and list size $L$** if $\abs{\calC \cap \ball(y,\rho)}\le L$ for any $y\in\F^N$.
-A list-decoding algorithm is an algorithm that outputs $\calC\cap\ball(y,\rho)$ given $y\in\F^N$ as input.
+A **list-decoding algorithm** is an algorithm that outputs $\calC\cap\ball(y,\rho)$ given $y\in\F^N$ as input.
 
 </div>
+
+- $\ball(x,\rho)=\{ y\in\F^N \colon \dist(x,y)\le\rho \}$ : Hamming ball.
+
 
 <div style="display: flex; justify-content: center; align-items: center;">
 
@@ -507,7 +507,7 @@ A list-decoding algorithm is an algorithm that outputs $\calC\cap\ball(y,\rho)$ 
 
 <v-click>
 
-In this work, we need the following properties:
+In this work, we need the following:
 
 1. rate is $\Omega(1)$
 2. list-decodable within radius $\rho=1-\alpha/2$ and list size $L=\widetilde{O}(1)$ using an $\widetilde{O}(N)$-time algorithm.
