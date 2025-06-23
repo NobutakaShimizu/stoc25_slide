@@ -320,7 +320,7 @@ color: amber-light
 
 If we can compute matrix multiplication with average agreement $\alpha$,
 then we can compute matrix multiplication with average agreement $1$ in time $\widetilde{O}(T(n)\cdot \log\abs{\F}\log(1/\alpha))$
-if the field satisfies $\abs{\F}\ge 10n/\alpha^2$.
+if the field satisfies $\abs{\F}> n/\alpha^2$.
 
 </div>
 
