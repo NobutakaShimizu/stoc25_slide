@@ -1,6 +1,6 @@
 <mxfile host="65bd71144e">
     <diagram id="aPFuF-Y7tjtQSt4r1UhX" name="ページ1">
-        <mxGraphModel dx="1686" dy="991" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="1" shadow="0">
+        <mxGraphModel dx="735" dy="261" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="1" shadow="0">
             <root>
                 <mxCell id="0"/>
                 <mxCell id="1" parent="0"/>
@@ -56,11 +56,8 @@
                 <mxCell id="14" value="$$B_3$$" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" parent="1" vertex="1">
                     <mxGeometry x="138" y="125" width="70" height="30" as="geometry"/>
                 </mxCell>
-                <mxCell id="15" value="$$=$$" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" parent="1" vertex="1">
-                    <mxGeometry x="180" y="85" width="60" height="30" as="geometry"/>
-                </mxCell>
-                <mxCell id="17" value="$$\underbrace{A_1B_1}_{f(A_1,B_1)} +\underbrace{A_2B_2}_{f(A_2,B_2)} + \underbrace{A_3B_3}_{f(A_3,B_3)}$$" style="text;html=1;align=left;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" parent="1" vertex="1">
-                    <mxGeometry x="223" y="85" width="630" height="30" as="geometry"/>
+                <mxCell id="21" value="$$=f(A_1,B_1)+f(A_2,B_2)+f(A_3,B_3)$$" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+                    <mxGeometry x="200" y="85" width="240" height="30" as="geometry"/>
                 </mxCell>
             </root>
         </mxGraphModel>

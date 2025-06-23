@@ -129,7 +129,13 @@ color: amber-light
 
 ::content::
 
-<div style="width: 60%; margin: 0 auto;">
+<div class="question">
+
+When can we get an $O(n^2)$-time algorithm? 🧐
+
+</div>
+
+<div style="width: 55%; margin: 0 auto;">
 ```mermaid
 ---
 config:
@@ -150,11 +156,7 @@ th {
 }
 </style>
 
-<v-click>
 
-The exponent $\omega$ improves by **0.0046** over **35** years 😔
-
-</v-click>
 
 ---
 layout: top-title
@@ -167,7 +169,18 @@ color: amber-light
 
 ::content::
 
-If the current improvement rate (0.0046 / 35 yrs) continues, we need 3122 more years to reach $\omega=2$.
+<div class="topic-box">
+
+<div style="text-align: center;">
+
+😩😩😩😩 3122 years 😩😩😩😩
+
+(if the current improvement rate 0.0046 / 35 yrs continues)
+
+</div>
+
+</div>
+
 
 
 <div style="width: 80%; margin: 0 auto;">
@@ -180,11 +193,8 @@ If the current improvement rate (0.0046 / 35 yrs) continues, we need 3122 more y
 
 </div>
 
-<v-click>
 
-Moreover, the hidden constant factor of current techniques is huge <a class="cite-reference" href="https://epubs.siam.org/doi/10.1137/1.9781611978322.61">\[Alman, Yu, SODA'25\]</a>.
 
-</v-click>
 
 ---
 layout: top-title
@@ -303,15 +313,15 @@ color: amber-light
 
 <div class="theorem">
 
-For any $\alpha\in(0,1]$, consider a finite field of size $\abs{\F}>10n/\alpha^2$.
-If there exists a $T(n)$-time algorithm with average agreement $\alpha$,
-then there exists an $\widetilde{O}(T(n)\poly(1/\alpha) \cdot \log(\abs{\F}))$-time algorithm with average agreement $1$.
+If we can compute matrix multiplication with average agreement $\alpha$,
+then we can compute matrix multiplication with average agreement $1$ in almost the same time
+if the field satisfies $\abs{\F}\ge 10n/\alpha^2$.
 
 </div>
 
 <v-clicks>
 
-- $\exists$ average-case approximation algorithm $\Rightarrow$ $\exists$ worst-case exact algorithm
+- overhead: $\log n\cdot \log\abs{\F}\cdot \poly(1/\alpha)$
 
 
 <div class="theorem">
@@ -350,7 +360,7 @@ Moreover, we can construct $C'$ in time $O_{p,\varepsilon}(n^3)$ given $C$.
 <v-clicks>
 
 - $\exists$ circuit $C$ with $\textcolor{c2185b}{\alpha\ge\frac{1}{\abs{\F}}+\varepsilon}$ $\Rightarrow$ $\exists$ circuit $C'$ with $\textcolor{c2185b}{\alpha=1}$.
-- Proof is based on Yao's XOR Lemma <a href="https://ieeexplore.ieee.org/document/4568378" class="cite-reference">\[Yao, SFCS'82\]</a>
+- Proof is based on Yao's XOR Lemma <a href="https://ieeexplore.ieee.org/document/4568378" class="cite-reference">\[Yao, SFCS(FOCS)'82\]</a>
   - fundamental result in average-case complexity
 
 </v-clicks>
@@ -623,7 +633,7 @@ color: amber-light
 # XOR Lemma and Matrix Multiplication
 ::content::
 
-- If $f\colon\{0,1\}^n \to \{0,1\}$ is hard to compute on more than $(1-\delta)$-fraction of inputs, then $\textcolor{c2185b}{f^{\oplus k}(x_1,\dots,x_k):=f(x_1)\oplus \cdots \oplus f(x_k)}$ is hard to compute on more than $(1/2-\varepsilon)$-fraction of inputs <a class="cite-reference" href="https://ieeexplore.ieee.org/document/4568378">\[Yao, SFCS'82\]</a>
+- If $f\colon\{0,1\}^n \to \{0,1\}$ is hard to compute on more than $(1-\delta)$-fraction of inputs, then $\textcolor{c2185b}{f^{\oplus k}(x_1,\dots,x_k):=f(x_1)\oplus \cdots \oplus f(x_k)}$ is hard to compute on more than $(1/2-\varepsilon)$-fraction of inputs <a class="cite-reference" href="https://ieeexplore.ieee.org/document/4568378">\[Yao, SFCS(FOCS)'82\]</a>
 
   - **Contraposition**: If some circuit $C$ computes $f^{\oplus k}$ for at least $(1/2+\varepsilon)$-fraction of inputs, then some slightly larger circuit $C'$ computes $f$ for at least $(1-\delta)$-fraction of inputs.
 
@@ -637,6 +647,10 @@ color: amber-light
 
 </div>
 
+- Naive reduction (XOR lemma for each entry) gives blow-up of factor $n^2$
+
+- Our reduction: $O_{\delta,\varepsilon}(1)$
+
 </v-clicks>
 
 
@@ -648,11 +662,11 @@ color: amber-light
 # Summary
 ::content::
 - If we can solve **approximate** matrix multiplication **on average**, then we can solve **exact** matrix multiplication for **any input** in almost the same time.
-- Proof technique: encoding with tensor code + list-decoding
+- **Technique**: encoding using **tensor code** + list-decoding
   - When the field $\F$ is large ($\abs{\F} = \Omega(n)$): Reed-Solomon code
   - When the field $\F$ is constant: 
     - expander-based codes <a href="https://drops.dagstuhl.de/entities/document/10.4230/LIPIcs.APPROX/RANDOM.2023.60" class="cite-reference">\[Jeronimo, RANDOM'23\]</a> (not optimal)
-    - nonuniform reduction based on XOR lemma (optimal)
+    - nonuniform reduction based on **XOR lemma** (optimal)
 - Future directions
   - Can we do something similar for matrix multiplication over the **real numbers**? (In practice, matrix multiplication over the reals is mainstream)
   - Reduce the hidden constant $2^{2^{\poly(p/\varepsilon)}}$ when the field is small
