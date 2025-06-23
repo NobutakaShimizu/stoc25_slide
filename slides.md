@@ -182,7 +182,7 @@ If the current improvement rate (0.0046 / 35 yrs) continues, we need 3122 more y
 
 <v-click>
 
-Moreover, the hidden constant factor of current techniques is huge <a class="cite-reference" href="https://epubs.siam.org/doi/10.1137/1.9781611978322.61">\[Alman, Yu, 2025\]</a>.
+Moreover, the hidden constant factor of current techniques is huge <a class="cite-reference" href="https://epubs.siam.org/doi/10.1137/1.9781611978322.61">\[Alman, Yu, SODA'25\]</a>.
 
 </v-click>
 
@@ -210,12 +210,6 @@ Given two **random** matrices $A,B\sim\F^{n\times n}$ as input, compute any matr
 
 </div>
 
-<figcaption style="text-align: center; font-size: 0.8em; color: #666;">
-
-The "agreement" entries depend on the input matrices $A,B$.
-
-</figcaption>
-
 <v-clicks>
 
 - $\alpha = 1$: the usual (average-case) matrix multiplication
@@ -238,14 +232,14 @@ color: amber-light
 ::content::
 
 - Many fast matrix multiplication algorithms are impractical
-  - Huge constant factors <a href="https://epubs.siam.org/doi/10.1137/1.9781611978322.61" class="cite-reference">\[Alman, Yu, 2025\]</a>
+  - Huge constant factors <a href="https://epubs.siam.org/doi/10.1137/1.9781611978322.61" class="cite-reference">\[Alman, Yu, SODA'25\]</a>
 
 <v-clicks>
 
 - Matrix multiplication algorithms using physical systems (with practical considerations)
-  - Water flow <a href="https://drops.dagstuhl.de/entities/document/10.4230/LIPIcs.ITCS.2024.96" class="cite-reference">\[Valinat, 2024\]</a>
-  - Thermodynamic systems <a href="https://openreview.net/forum?id=6flkWTzK2H" class="cite-reference">\[Coles et al, 2023\]</a>
-  - Optical devices <a href = "https://www.nature.com/articles/s41377-022-00717-8" class="cite-reference">\[Zhou et al, 2022\]</a>
+  - Water flow <a href="https://drops.dagstuhl.de/entities/document/10.4230/LIPIcs.ITCS.2024.96" class="cite-reference">\[Valinat, ITCS'24\]</a>
+  - Thermodynamic systems <a href="https://openreview.net/forum?id=6flkWTzK2H" class="cite-reference">\[Coles et al, NeurIPS'23 (workshop)\]</a>
+  - Optical devices <a href = "https://www.nature.com/articles/s41377-022-00717-8" class="cite-reference">\[Zhou et al, Light: Science & Applications'22\]</a>
 
 - These algorithms may have **errors** due to white noise in physical systems
   - Physical devices solves **approximate** matrix multiplication
@@ -356,7 +350,7 @@ Moreover, we can construct $C'$ in time $O_{p,\varepsilon}(n^3)$ given $C$.
 <v-clicks>
 
 - $\exists$ circuit $C$ with $\textcolor{c2185b}{\alpha\ge\frac{1}{\abs{\F}}+\varepsilon}$ $\Rightarrow$ $\exists$ circuit $C'$ with $\textcolor{c2185b}{\alpha=1}$.
-- Proof is based on Yao's XOR Lemma <a href="https://ieeexplore.ieee.org/document/4568378" class="cite-reference">\[Yao, 1982\]</a>
+- Proof is based on Yao's XOR Lemma <a href="https://ieeexplore.ieee.org/document/4568378" class="cite-reference">\[Yao, SFCS'82\]</a>
   - fundamental result in average-case complexity
 
 </v-clicks>
@@ -381,7 +375,7 @@ color: amber-light
   - simple and thus hidden constant factor is reasonably small
 - Our **uniform** reductions are based on **list-decodable codes** with linear rate
   - When $\F$ is large, we use Reed-Solomon codes
-  - When $\F$ is small, we use expander-based codes <a href="https://drops.dagstuhl.de/entities/document/10.4230/LIPIcs.APPROX/RANDOM.2023.60" class="cite-reference">\[Jeronimo, 2023\]</a>
+  - When $\F$ is small, we use expander-based codes <a href="https://drops.dagstuhl.de/entities/document/10.4230/LIPIcs.APPROX/RANDOM.2023.60" class="cite-reference">\[Jeronimo, Srivastava, Tulsiani, STOC'21\]</a>, <a href="https://drops.dagstuhl.de/entities/document/10.4230/LIPIcs.APPROX/RANDOM.2023.60" class="cite-reference">\[Jeronimo, RANDOM'23\]</a>
     - hidden constant factor in our reduction is very large $2^{2^{\poly(\abs{F}/\varepsilon)}}$
 </v-clicks>  
 
@@ -411,8 +405,8 @@ color: amber-light
   - <a href="https://www.sciencedirect.com/science/article/pii/002200009390044W?via%3Dihub" class="cite-reference">\[Blum, Luby, Rubinfeld, JCSS'93\]</a>, <a href="https://dl.acm.org/doi/10.1145/3519935.3520041" class="cite-reference">\[Asadi, Golovnev, Gur, Shinkar, STOC'22\]</a>, <a href="https://dl.acm.org/doi/10.1145/3564246.3585189" class="cite-reference">\[Hirahara, Shimizu, STOC'23\]</a>
 
 - follow-up work: **uniform reduction** with **optimal** agreement $\alpha\ge\frac{1}{\abs{\F}}+\varepsilon$
-  - <a class="cite-reference" href="https://eccc.weizmann.ac.il/report/2025/066/">\[Hirahara, Shimizu, 2025\]</a> (hidden constant is large $2^{2^{\poly(\abs{\F}/\varepsilon)}}$)
-  - <a class="cite-reference" href="https://arxiv.org/abs/2502.13065">\[Vaikuntanathan, Zamir, 2025\]</a> under LPN assumption (hidden constant is $\polylog(\abs{\F}/\varepsilon)$)
+  - <a class="cite-reference" href="https://eccc.weizmann.ac.il/report/2025/066/">\[Hirahara, Shimizu, ICALP'25\]</a> (hidden constant is large $2^{2^{\poly(\abs{\F}/\varepsilon)}}$)
+  - <a class="cite-reference" href="https://arxiv.org/abs/2502.13065">\[Vaikuntanathan, Zamir, '25\]</a> under LPN assumption (hidden constant is $\polylog(\abs{\F}/\varepsilon)$)
 </v-clicks>
 
 ---
@@ -529,7 +523,7 @@ For an encoding function $\Enc\colon \F^n\ni x\mapsto Lx \in \F^N$ of a code $\c
 
 </div>
 
-- The list-decodability is inherited by the tensor code <a href="https://epubs.siam.org/doi/10.1137/090778274" class="cite-reference">[Gopalan, Guruswami, Raghavendra, 2011]</a>.
+- The list-decodability is inherited by the tensor code <a href="https://epubs.siam.org/doi/10.1137/090778274" class="cite-reference">\[Gopalan, Guruswami, Raghavendra, SICOMP'11\]</a>.
 
 <v-click>
 
@@ -586,7 +580,7 @@ Then, there exists an $\widetilde{O}((T(n) + n^2)\cdot \log(\abs{\F}))$-time mat
 <v-clicks>
 
 - If $\F$ is large, we can use the Reed-Solomon code
-- When $\abs{\F}=O(1)$, there exists a code with rate $\Omega(1)$, list size $O(1)$, and list-decodable within radius $1-\frac{1}{\abs{\F}}-\varepsilon$ in $\widetilde{O}(N^2)$ time <a href="https://drops.dagstuhl.de/entities/document/10.4230/LIPIcs.APPROX/RANDOM.2023.60" class="cite-reference">[Jeronimo, 2023]</a>. Using this, we can take $\textcolor{c2185b}{\alpha=\frac{2}{\abs{\F}}+\varepsilon}$.
+- When $\abs{\F}=O(1)$, there exists a code with rate $\Omega(1)$, list size $O(1)$, and list-decodable within radius $1-\frac{1}{\abs{\F}}-\varepsilon$ in $\widetilde{O}(N^2)$ time <a href="https://drops.dagstuhl.de/entities/document/10.4230/LIPIcs.APPROX/RANDOM.2023.60" class="cite-reference">\[Jeronimo, RANDOM'23\]</a>. Using this, we can take $\textcolor{c2185b}{\alpha=\frac{2}{\abs{\F}}+\varepsilon}$.
 
 </v-clicks>
 
@@ -629,7 +623,7 @@ color: amber-light
 # XOR Lemma and Matrix Multiplication
 ::content::
 
-- If $\textcolor{c2185b}{f\colon\{0,1\}^n \to \{0,1\}}$ is hard to compute on more than $(1-\delta)$-fraction of inputs, then $\textcolor{c2185b}{f^{\oplus k}(x_1,\dots,x_k):=f(x_1)\oplus \cdots \oplus f(x_k)}$ is hard to compute on more than $(1/2-\varepsilon)$-fraction of inputs <a class="cite-reference" href="https://ieeexplore.ieee.org/document/4568378">\[Yao, 1982\]</a>
+- If $f\colon\{0,1\}^n \to \{0,1\}$ is hard to compute on more than $(1-\delta)$-fraction of inputs, then $\textcolor{c2185b}{f^{\oplus k}(x_1,\dots,x_k):=f(x_1)\oplus \cdots \oplus f(x_k)}$ is hard to compute on more than $(1/2-\varepsilon)$-fraction of inputs <a class="cite-reference" href="https://ieeexplore.ieee.org/document/4568378">\[Yao, SFCS'82\]</a>
 
   - **Contraposition**: If some circuit $C$ computes $f^{\oplus k}$ for at least $(1/2+\varepsilon)$-fraction of inputs, then some slightly larger circuit $C'$ computes $f$ for at least $(1-\delta)$-fraction of inputs.
 
@@ -657,7 +651,7 @@ color: amber-light
 - Proof technique: encoding with tensor code + list-decoding
   - When the field $\F$ is large ($\abs{\F} = \Omega(n)$): Reed-Solomon code
   - When the field $\F$ is constant: 
-    - expander-based codes <a href="https://drops.dagstuhl.de/entities/document/10.4230/LIPIcs.APPROX/RANDOM.2023.60" class="cite-reference">\[Jeronimo, 2023\]</a> (not optimal)
+    - expander-based codes <a href="https://drops.dagstuhl.de/entities/document/10.4230/LIPIcs.APPROX/RANDOM.2023.60" class="cite-reference">\[Jeronimo, RANDOM'23\]</a> (not optimal)
     - nonuniform reduction based on XOR lemma (optimal)
 - Future directions
   - Can we do something similar for matrix multiplication over the **real numbers**? (In practice, matrix multiplication over the reals is mainstream)
