@@ -74,6 +74,8 @@ Given two matrices $A, B \in \F^{n\times n}$, compute their product $AB$ (over a
 
 </div>
 
+<v-click>
+
 <div style="display: flex; gap: 1em; font-size: 0.7em; border: 1px solid #ccc; padding: 0.5em; border-radius: 5px;">
 <div>
 
@@ -116,7 +118,7 @@ th {
 }
 </style>
 
-
+</v-click>
 
 ---
 layout: top-title
@@ -131,9 +133,11 @@ color: amber-light
 
 <div class="question">
 
-When can we get an $O(n^2)$-time algorithm? 🧐
+When can we get an $O(n^2)$-time algorithm?🧐
 
 </div>
+
+<v-click>
 
 <div style="width: 55%; margin: 0 auto;">
 ```mermaid
@@ -156,7 +160,7 @@ th {
 }
 </style>
 
-
+</v-click>
 
 ---
 layout: top-title
@@ -173,7 +177,7 @@ color: amber-light
 
 <div style="text-align: center;">
 
-😩😩😩😩 3122 years 😩😩😩😩
+😩😩😩😩 **3122 years** 😩😩😩😩
 
 (if the current improvement rate 0.0046 / 35 yrs continues)
 
@@ -192,8 +196,6 @@ color: amber-light
 </figure>
 
 </div>
-
-
 
 
 ---
@@ -237,27 +239,30 @@ color: amber-light
 
 ::title::
 
-# Practical Situation
+# Practical Situation: low-energy matrix multiplication
 
 ::content::
 
-- Many fast matrix multiplication algorithms are impractical
-  - Huge constant factors <a href="https://epubs.siam.org/doi/10.1137/1.9781611978322.61" class="cite-reference">\[Alman, Yu, SODA'25\]</a>
+- AI rely on large-scale matrix multiplication on GPU
+  - According to [International Energy Agency](https://www.iea.org/reports/electricity-2024/executive-summary), in 2026, **electricity consumption** from data centres, AI and the cryptocurrency could be the same as the total electricity consumption of Japan.
+
+<v-click>
+
+- Matrix multiplication algorithms using **physical devices** (aiming at low energy consumption)
+  - Water flow <a href="https://drops.dagstuhl.de/entities/document/10.4230/LIPIcs.ITCS.2024.96" class="cite-reference">\[Valinat, ITCS'24\]</a>, thermodynamic systems <a href="https://openreview.net/forum?id=6flkWTzK2H" class="cite-reference">\[Coles et al, NeurIPS'23 (workshop)\]</a>, optical devices <a href = "https://www.nature.com/articles/s41377-022-00717-8" class="cite-reference">\[Zhou et al, Light: Science & Applications'22\]</a>
+  - [post](https://www.quantamagazine.org/ai-needs-enormous-computing-power-could-light-based-chips-help-20240520/) by Quanta Magazine
+
+</v-click>
 
 <v-clicks>
 
-- Matrix multiplication algorithms using physical systems (with practical considerations)
-  - Water flow <a href="https://drops.dagstuhl.de/entities/document/10.4230/LIPIcs.ITCS.2024.96" class="cite-reference">\[Valinat, ITCS'24\]</a>
-  - Thermodynamic systems <a href="https://openreview.net/forum?id=6flkWTzK2H" class="cite-reference">\[Coles et al, NeurIPS'23 (workshop)\]</a>
-  - Optical devices <a href = "https://www.nature.com/articles/s41377-022-00717-8" class="cite-reference">\[Zhou et al, Light: Science & Applications'22\]</a>
-
 - These algorithms may have **errors** due to white noise in physical systems
-  - Physical devices solves **approximate** matrix multiplication
+  - Physical devices solve **approximate** matrix multiplication
 
 
 <div class="topic-box">
 
-We show how to **correct** the errors in approximate matrix multiplication algorithms.
+We show how to **correct** the errors in average-case approximate matrix multiplication algorithms.
 
 </div>
 
@@ -314,14 +319,14 @@ color: amber-light
 <div class="theorem">
 
 If we can compute matrix multiplication with average agreement $\alpha$,
-then we can compute matrix multiplication with average agreement $1$ in almost the same time
+then we can compute matrix multiplication with average agreement $1$ in time $\widetilde{O}(T(n)\cdot \log\abs{\F}\log(1/\alpha))$
 if the field satisfies $\abs{\F}\ge 10n/\alpha^2$.
 
 </div>
 
 <v-clicks>
 
-- overhead: $\log n\cdot \log\abs{\F}\cdot \poly(1/\alpha)$
+- **worst-case to average-case** and **exact to approximate** reduction😃
 
 
 <div class="theorem">
@@ -332,7 +337,7 @@ then there exists a $\widetilde{O}_{\abs{\F},\varepsilon}(T(n))$-time algorithm 
 
 </div>
 
-- $\alpha\ge \frac{\textcolor{c2185b}{2}}{\abs{\F}}+\varepsilon$ is not optimal
+- Can we replace $\alpha\ge \frac{\textcolor{c2185b}{2}}{\abs{\F}}+\varepsilon$ with $\alpha\ge \frac{\textcolor{c2185b}1}{\abs{\F}}+\varepsilon$?🧐
 
 </v-clicks>
 
@@ -352,14 +357,12 @@ color: amber-light
 Let $\varepsilon\in(0,1]$ be a constant and $\F$ be any finite field of constant prime size.
 If there exists a circuit $C$ of size $S$ with average agreement $\alpha\ge \frac{1}{\abs{\F}}+\varepsilon$,
 then there exists a circuit $C'$ of size $\widetilde{O}_{p,\varepsilon}(S)$ with average agreement $1$.
-
-Moreover, we can construct $C'$ in time $O_{p,\varepsilon}(n^3)$ given $C$.
-
 </div>
 
 <v-clicks>
 
 - $\exists$ circuit $C$ with $\textcolor{c2185b}{\alpha\ge\frac{1}{\abs{\F}}+\varepsilon}$ $\Rightarrow$ $\exists$ circuit $C'$ with $\textcolor{c2185b}{\alpha=1}$.
+- We can construct $C'$ in time $O_{p,\varepsilon}(n^3)$ given $C$.
 - Proof is based on Yao's XOR Lemma <a href="https://ieeexplore.ieee.org/document/4568378" class="cite-reference">\[Yao, SFCS(FOCS)'82\]</a>
   - fundamental result in average-case complexity
 
@@ -380,9 +383,9 @@ color: amber-light
 
 <v-clicks>
 
-- We believe that our **nonuniform** reduction is **practical** if $\abs{\F}$ is small
+- Our **nonuniform** reduction is simple and combinatorial
   - running time overhead is $\abs{\F}\cdot \poly(1/\varepsilon) \cdot \log n$
-  - simple and thus hidden constant factor is reasonably small
+  
 - Our **uniform** reductions are based on **list-decodable codes** with linear rate
   - When $\F$ is large, we use Reed-Solomon codes
   - When $\F$ is small, we use expander-based codes <a href="https://drops.dagstuhl.de/entities/document/10.4230/LIPIcs.APPROX/RANDOM.2023.60" class="cite-reference">\[Jeronimo, Srivastava, Tulsiani, STOC'21\]</a>, <a href="https://drops.dagstuhl.de/entities/document/10.4230/LIPIcs.APPROX/RANDOM.2023.60" class="cite-reference">\[Jeronimo, RANDOM'23\]</a>
@@ -478,8 +481,7 @@ color: amber-light
   
 <v-clicks>
   
-- $r=n/N$: rate of $\calC$
-- $x\in \calC$: **codeword**
+- $r=n/N$: **rate** of $\calC$ (larger $r$ is better)
 - **distance**: fractional Hamming distance, i.e., $\dist(x,y):=\Pr_{i\sim[N]}[x_i\ne y_i]$
 
 </v-clicks>
@@ -495,8 +497,7 @@ color: amber-light
 
 <div class="definition">
 
-A code $\calC\subseteq\F^N$ is **list-decodable within radius $\rho$ and list size $L$** if $\abs{\calC \cap \ball(y,\rho)}\le L$ for any $y\in\F^N$.
-A **list-decoding algorithm** is an algorithm that outputs $\calC\cap\ball(y,\rho)$ given $y\in\F^N$ as input.
+A code $\calC\subseteq\F^N$ is **$(\rho,L)$-list-decodable** if $\abs{\calC \cap \ball(y,\rho)}\le L$ for any $y\in\F^N$.
 
 </div>
 
@@ -514,7 +515,7 @@ A **list-decoding algorithm** is an algorithm that outputs $\calC\cap\ball(y,\rh
 In this work, we need the following:
 
 1. rate is $\Omega(1)$
-2. list-decodable within radius $\rho=1-\alpha/2$ and list size $L=\widetilde{O}(1)$ using an $\widetilde{O}(N)$-time algorithm.
+2. $(1-\alpha/2,L)$-list-decodable for $L=\widetilde{O}(1)$ using an $\widetilde{O}(N)$-time algorithm.
 
 </v-click>
 
@@ -528,25 +529,21 @@ color: amber-light
 
 <div class="definition">
 
-For an encoding function $\Enc\colon \F^n\ni x\mapsto Lx \in \F^N$ of a code $\calC$, the **tensor code** is the code $\calC^2\subseteq\F^{N\times N}$ specified by the encoding function $\Enc'\colon \F^{n\times n} \to \F^{N\times N}$ defined by
+The **tensor code** with respect to $\Enc\colon x\mapsto Lx$ is the code $\calC^2\subseteq\F^{N\times N}$ specified by the encoding function $\Enc'\colon \F^{n\times n} \to \F^{N\times N}$ defined by
   $$ \Enc'\colon X \mapsto L X L^\top. $$
 
 </div>
 
-- The list-decodability is inherited by the tensor code <a href="https://epubs.siam.org/doi/10.1137/090778274" class="cite-reference">\[Gopalan, Guruswami, Raghavendra, SICOMP'11\]</a>.
 
-<v-click>
+<div style="display: flex; justify-content: center; align-items: center;">
 
-<div class="theorem">
-
-If the original code is list-decodable within radius $1-\textcolor{c2185b}{c}$ with list size $O(1)$, then the left-right (tensor) code is list-decodable within radius $1-\textcolor{c2185b}{2c}$ with list size $O(1)$.
+![tensor encoding](./images/tensor.svg)
 
 </div>
 
-- There is a **factor of two loss** in $c$.
-  - the main reason why our uniform reduction is not optimal if $\F$ is small.
+- original code is $(1-\textcolor{c2185b}{\alpha},O(1))$-list-decodable $\Rightarrow$ tensor code is $(1-\textcolor{c2185b}{2\alpha},O(1))$-list-decodable <a href="https://epubs.siam.org/doi/10.1137/090778274" class="cite-reference">\[Gopalan, Guruswami, Raghavendra, SICOMP'11\]</a>.
 
-</v-click>
+  - the non-optimality of $\alpha\ge \frac{\textcolor{c2185b}{2}}{\abs{\F}}+\varepsilon$ in our uniform reduction is due to this loss
 
 ---
 layout: top-title
@@ -575,24 +572,19 @@ color: amber-light
 ::title::
 # Uniform Reduction
 ::content::
-Summarizing the discussion so far, we obtain the following result:
 
-<div class="theorem">
+- If $\abs{\F}=\Omega(n)$, we use the Reed-Solomon code
+  - nearly linear time list-decoding algorithm <a href="https://ieeexplore.ieee.org/document/1459042" class="cite-reference">\[Alekhnovich, IEEE Trans. Inf. Theory'05\]</a>
+- If $\F$ is small, we use an expander-based code <a href="https://drops.dagstuhl.de/entities/document/10.4230/LIPIcs.APPROX/RANDOM.2023.60" class="cite-reference">\[Jeronimo, Srivastava, Tulsiani, STOC'21\]</a>, <a href="https://drops.dagstuhl.de/entities/document/10.4230/LIPIcs.APPROX/RANDOM.2023.60" class="cite-reference">\[Jeronimo, RANDOM'23\]</a>
+  - rate $\Omega(1)$, list size $O(1)$, and list-decodable within radius $1-\frac{1}{\abs{\F}}-\varepsilon$ in $\widetilde{O}(N)$ time
+  - $\Omega(1)$-rate code + direct sum over expander walk or HDX
+  - hidden constant factor is $2^{2^{\poly(\abs{F}/\varepsilon)}}$ due to regularity lemma of list-decoding algorithm
 
-Assume the following two conditions:
-- There exists a $T(n)$-time algorithm $M$ with agreement $\textcolor{c2185b}{\alpha}$ (for worst-case inputs)
-- There exists a code with rate $\Omega(1)$ that is list-decodable within radius $1-\textcolor{c2185b}{\alpha/2}$ with list size $\widetilde{O}(1)$ in $\widetilde{O}(N)$ time.
+<div class="topic-box">
 
-Then, there exists an $\widetilde{O}((T(n) + n^2)\cdot \log(\abs{\F}))$-time matrix multiplication algorithm.
+This reduction is **exact-to-approximate** but **worst-case to worst-case**.
 
 </div>
-
-<v-clicks>
-
-- If $\F$ is large, we can use the Reed-Solomon code
-- When $\abs{\F}=O(1)$, there exists a code with rate $\Omega(1)$, list size $O(1)$, and list-decodable within radius $1-\frac{1}{\abs{\F}}-\varepsilon$ in $\widetilde{O}(N^2)$ time <a href="https://drops.dagstuhl.de/entities/document/10.4230/LIPIcs.APPROX/RANDOM.2023.60" class="cite-reference">\[Jeronimo, RANDOM'23\]</a>. Using this, we can take $\textcolor{c2185b}{\alpha=\frac{2}{\abs{\F}}+\varepsilon}$.
-
-</v-clicks>
 
 ---
 layout: top-title
@@ -602,9 +594,10 @@ color: amber-light
 # Worst-Case to Average-Case Reduction
 ::content::
 
-- Even if $A,B\sim\F^{n\times n}$, their encodings $LA,BL^\top$ are **not** uniform.
+- Issue: even if $A,B\sim\F^{n\times n}$, their encodings $LA,BL^\top$ are **not** uniform
 
-- **Idea**: Divide $LA, BL^\top$ into small blocks such that each block is uniform.
+- **Idea**: divide $LA, BL^\top$ into small blocks such that each block is uniform
+  - technical part: way to compute such division
 
 <div style="display: flex; justify-content: center; align-items: center;">
 
