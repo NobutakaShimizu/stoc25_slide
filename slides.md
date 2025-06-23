@@ -665,7 +665,7 @@ color: amber-light
 - **Technique**: encoding using **tensor code** + list-decoding
   - When the field $\F$ is large ($\abs{\F} = \Omega(n)$): Reed-Solomon code
   - When the field $\F$ is constant: 
-    - expander-based codes <a href="https://drops.dagstuhl.de/entities/document/10.4230/LIPIcs.APPROX/RANDOM.2023.60" class="cite-reference">\[Jeronimo, RANDOM'23\]</a> (not optimal)
+    - expander-based (direct sum on expander walk or HDX) codes <a href="https://drops.dagstuhl.de/entities/document/10.4230/LIPIcs.APPROX/RANDOM.2023.60" class="cite-reference">\[Jeronimo, RANDOM'23\]</a> (not optimal)
     - nonuniform reduction based on **XOR lemma** (optimal)
 - Future directions
   - Can we do something similar for matrix multiplication over the **real numbers**? (In practice, matrix multiplication over the reals is mainstream)
