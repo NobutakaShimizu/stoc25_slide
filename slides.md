@@ -6,7 +6,7 @@ info: |
   ## Error-Correction of Matrix Multiplication Algorithms
   STOC2025
 
-author: Nobutaka Shimizu
+author: Nobutaka s
 mdc: true
 css: unocss
 style: |
@@ -412,10 +412,10 @@ color: amber-light
 
 
 - Worst-case to average-case reductions (average-case solver computes all entries)
-  - <a href="https://www.sciencedirect.com/science/article/pii/002200009390044W?via%3Dihub" class="cite-reference">\[Blum, Luby, Rubinfeld, JCSS'93\]</a>, <a href="https://dl.acm.org/doi/10.1145/3519935.3520041" class="cite-reference">\[Asadi, Golovnev, Gur, Shinkar, STOC'22\]</a>, <a href="https://dl.acm.org/doi/10.1145/3564246.3585189" class="cite-reference">\[Hirahara, Shimizu, STOC'23\]</a>
+  - <a href="https://www.sciencedirect.com/science/article/pii/002200009390044W?via%3Dihub" class="cite-reference">\[Blum, Luby, Rubinfeld, JCSS'93\]</a>, <a href="https://dl.acm.org/doi/10.1145/3519935.3520041" class="cite-reference">\[Asadi, Golovnev, Gur, Shinkar, STOC'22\]</a>, <a href="https://dl.acm.org/doi/10.1145/3564246.3585189" class="cite-reference">\[Hirahara, S., STOC'23\]</a>
 
 - follow-up work: **uniform reduction** with **optimal** agreement $\alpha\ge\frac{1}{\abs{\F}}+\varepsilon$
-  - <a class="cite-reference" href="https://eccc.weizmann.ac.il/report/2025/066/">\[Hirahara, Shimizu, ICALP'25\]</a> (hidden constant is large $2^{2^{\poly(\abs{\F}/\varepsilon)}}$)
+  - <a class="cite-reference" href="https://eccc.weizmann.ac.il/report/2025/066/">\[Hirahara, S., ICALP'25\]</a> (hidden constant is large $2^{2^{\poly(\abs{\F}/\varepsilon)}}$)
   - <a class="cite-reference" href="https://arxiv.org/abs/2502.13065">\[Vaikuntanathan, Zamir, '25\]</a> under LPN assumption (hidden constant is $\polylog(\abs{\F}/\varepsilon)$)
 </v-clicks>
 
