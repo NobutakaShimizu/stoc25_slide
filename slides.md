@@ -177,9 +177,9 @@ color: amber-light
 
 <div style="text-align: center;">
 
-😩😩😩😩 **3122 years** 😩😩😩😩
+🎉🎉🎉🎉 **Best Paper of STOC 5147 (or FOCS 5147)** 🎉🎉🎉🎉
 
-(if the current improvement rate 0.0046 / 35 yrs continues)
+if the current improvement rate 0.0046 / 35 yrs continues
 
 </div>
 
