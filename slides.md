@@ -300,7 +300,7 @@ $$
 <v-clicks>
 
 - $\alpha=1$ means that $M$ computes $AB$ exactly for any input $A,B$.
-- We can estimate $\alpha$ in $\widetilde{O}(n^2)$ time by random sampling
+- Why **average-case**?🤔 -> we can estimate **$\alpha$** in $\widetilde{O}(n^2)$ time by random sampling🤓
   - Choose $A,B,i,j$ and check whether $M(A,B)_{i,j}=(AB)_{i,j}$
 
 </v-clicks>
